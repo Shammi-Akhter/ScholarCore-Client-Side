@@ -7,13 +7,15 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
-import AllScholarships from './Component/AllScholarships/AllScholarships.jsx'
+
 import Root from './Layout/Root.jsx'
 import AboutUs from './Component/AboutUs/AboutUs.jsx'
 import Contact from './Component/Contact/Contact.jsx'
 import ErrorPage from './Component/ErrorPage/ErrorPage.jsx'
 import Login from './Component/Login/Login.jsx'
 import Register from './Component/Register/Register.jsx'
+import AllScholarship from './Component/AllScholarship/AllScholarship.jsx'
+import ScholarshipDetails from './Component/ScholarshipDetails/ScholarshipDetails.jsx'
 
 
 
@@ -26,10 +28,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />
       },
-      {
-        path: '/all-scholarships',
-        element: <AllScholarships />
-      },
+      
       {
         path: '/about-us',
         element: <AboutUs />
@@ -45,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />
+      },
+      {
+        path: '/all-scholarship',
+        element: <AllScholarship/>
+      },
+      {
+        path:'/scholarship-details',
+        element:<ScholarshipDetails/>
       }
     ],
     errorElement: <ErrorPage />

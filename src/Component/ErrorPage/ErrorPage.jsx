@@ -7,19 +7,19 @@ const ErrorPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
    
-      {/* Card wrapper */}
+      
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className="bg-white shadow-2xl rounded-2xl p-10 text-center max-w-md w-full"
       >
-        {/* Cute “float & bob” icon */}
+   
         <motion.div
           className="flex justify-center mb-6 text-yellow-500"
           initial={{ y: -10 }}
           animate={{
-            y: [ -10, 10, -10 ],      // up → down → up
+            y: [ -10, 10, -10 ],      
           }}
           transition={{
             duration: 2.5,

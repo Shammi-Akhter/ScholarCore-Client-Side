@@ -3,25 +3,24 @@ import { Eye, EyeOff } from 'lucide-react';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Add registration logic here
+
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white shadow-lg rounded-2xl w-full max-w-md p-8">
-        {/* Header */}
+        
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-gray-800">Create Your Account</h2>
           <p className="text-sm text-gray-500 mt-1">Sign up to get started!</p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleRegister} className="space-y-5">
-          {/* Name */}
+         
           <div>
             <label className="block text-gray-700 font-medium mb-1">Full Name</label>
             <input
@@ -32,7 +31,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Email */}
+         
           <div>
             <label className="block text-gray-700 font-medium mb-1">Email</label>
             <input
@@ -43,7 +42,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Password */}
+         
           <div>
             <label className="block text-gray-700 font-medium mb-1">Password</label>
             <div className="relative">
@@ -65,7 +64,7 @@ const Register = () => {
 
           
 
-          {/* Submit */}
+        
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
@@ -74,7 +73,7 @@ const Register = () => {
           </button>
         </form>
 
-        {/* Footer */}
+     
         <p className="text-center text-sm text-gray-500 mt-6">
           Already have an account?{' '}
           <a href="/login" className="text-blue-600 hover:underline">
