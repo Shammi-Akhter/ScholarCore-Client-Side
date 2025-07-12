@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <AllScholarship/>
       },
       {
-        path:'/scholarship-details',
+        path:"/scholarship-details/:id",
         element:<ScholarshipDetails/>
       }
     ],

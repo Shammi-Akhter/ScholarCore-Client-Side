@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 // Navigation links for re‑use
 const navItems = [
     { path: "/", label: "Home" },
-    { path: "/all-scholarships", label: "All Scholarships" },
+    { path: "/all-scholarship", label: "All Scholarships" },
     { path: "", label: "User Dashboard" },
     { path: "", label: "Admin Dashboard" },
 ];

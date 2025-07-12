@@ -38,22 +38,22 @@ const ScholarshipDetails = () => {
         <div className="max-w-5xl mx-auto px-4 py-10">
             <div className="bg-white shadow-lg rounded-xl overflow-hidden mb-8">
                 {scholarship.image && (
-                    <img src={scholarship.image} alt="University Logo" className="w-full h-64 object-cover" />
+                    <img src={scholarship.universityLogo} alt="University Logo" className="w-full h-64 object-cover" />
                 )}
                 <div className="p-6">
-                    <h2 className="text-3xl font-bold text-blue-800 mb-3">{scholarship.universityName}</h2>
-                    <p><strong>Category:</strong> {scholarship.category}</p>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-3">{scholarship.universityName}</h2>
+                    <p><strong>Category:</strong> {scholarship.scholarshipCategory }</p>
                     <p><strong>Location:</strong> {scholarship.location}</p>
-                    <p><strong>Deadline:</strong> {scholarship.deadline}</p>
+                    <p><strong>Deadline:</strong> {scholarship.applicationDeadline}</p>
                     <p><strong>Subject:</strong> {scholarship.subjectCategory}</p>
-                    <p><strong>Description:</strong> {scholarship.description || 'N/A'}</p>
-                    <p><strong>Stipend:</strong> {scholarship.stipend || 'Not specified'}</p>
+                    <p><strong>Description:</strong> {scholarship.
+scholarshipDescription || 'N/A'}</p>
                     <p><strong>Post Date:</strong> {scholarship.postDate || 'N/A'}</p>
                     <p><strong>Service Charge:</strong> {scholarship.serviceCharge || 'N/A'}</p>
-                    <p><strong>Application Fee:</strong> {scholarship.applicationFee || 'Free'}</p>
+                    <p><strong>Application Fee:</strong> ${scholarship.applicationFees || 'Free'}</p>
 
                     <button
-                        className="mt-6 bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition"
+                        className="mt-6 bg-amber-200 text-gray-900 px-6 py-3 rounded-full hover:bg-amber-300 transition"
                         onClick={() => alert('Redirecting to scholarship application...')}
                     >
                         Apply Scholarship

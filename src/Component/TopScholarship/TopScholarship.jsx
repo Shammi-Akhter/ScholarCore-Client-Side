@@ -26,7 +26,7 @@ const TopScholarship = () => {
     if (loading) return <p className="text-center mt-10 text-lg font-medium">Loading...</p>;
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 ">
             <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">Top Scholarships</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -44,7 +44,7 @@ const TopScholarship = () => {
                         )}
 
                         <div className="p-5 space-y-2">
-                            <h3 className="text-xl font-semibold text-center text-gray-800">{scholarship.universityName || 'University Name'}</h3>
+                            <h3 className="text-xl font-semibold  text-gray-800">{scholarship.universityName || 'University Name'}</h3>
                             <p className="text-sm  text-gray-900">
                                 <strong>Category:</strong> {scholarship.scholarshipCategory || 'N/A'}
                             </p>
@@ -69,7 +69,7 @@ const TopScholarship = () => {
                                 </span>
                             </div>
 
-                            <NavLink to="/scholarship-details">
+                            <NavLink to={`/scholarship-details/${scholarship._id}`}>
                                 <button
                                     className="mt-3 w-2/3 bg-amber-200  text-gray-900 font-medium py-2 rounded-full hover:bg-amber-300 transition"
 
