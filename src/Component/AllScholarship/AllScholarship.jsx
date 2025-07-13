@@ -43,7 +43,7 @@ const AllScholarship = () => {
                         <div className="p-5 space-y-2">
                             <h3 className="text-xl font-semibold  text-gray-800">{scholar.universityName || 'University Name'}</h3>
                             <p className="text-sm text-gray-700">
-                                <strong>Category:</strong> {scholar.scholarCategory || 'N/A'}
+                                <strong>Category:</strong> {scholar.scholarshipCategory || 'N/A'}
                             </p>
                             <p className="text-sm text-gray-700">
                                 <strong>Location:</strong> {scholar.location || 'N/A'}

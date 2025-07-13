@@ -17,7 +17,7 @@ import Register from './Component/Register/Register.jsx'
 import AllScholarship from './Component/AllScholarship/AllScholarship.jsx'
 import ScholarshipDetails from './Component/ScholarshipDetails/ScholarshipDetails.jsx'
 import AuthProvider from './context/AuthContext.jsx'
-
+import Checkout from './Component/Checkout.jsx';
 
 
 const router = createBrowserRouter([
@@ -53,6 +53,10 @@ const router = createBrowserRouter([
       {
         path:"/scholarship-details/:id",
         element:<ScholarshipDetails/>
+      },
+      {
+        path: '/checkout/:id',
+        element: <Checkout />
       }
     ],
     errorElement: <ErrorPage />

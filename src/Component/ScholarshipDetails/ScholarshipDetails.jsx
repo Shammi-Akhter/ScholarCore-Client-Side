@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -9,6 +9,7 @@ const ScholarshipDetails = () => {
     const [scholarship, setScholarship] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:5000/scholarships/${id}`)
@@ -46,15 +47,14 @@ const ScholarshipDetails = () => {
                     <p><strong>Location:</strong> {scholarship.location}</p>
                     <p><strong>Deadline:</strong> {scholarship.applicationDeadline}</p>
                     <p><strong>Subject:</strong> {scholarship.subjectCategory}</p>
-                    <p><strong>Description:</strong> {scholarship.
-scholarshipDescription || 'N/A'}</p>
+                    <p><strong>Description:</strong> {scholarship.scholarshipDescription || 'N/A'}</p>
                     <p><strong>Post Date:</strong> {scholarship.postDate || 'N/A'}</p>
                     <p><strong>Service Charge:</strong> {scholarship.serviceCharge || 'N/A'}</p>
                     <p><strong>Application Fee:</strong> ${scholarship.applicationFees || 'Free'}</p>
 
                     <button
                         className="mt-6 bg-amber-200 text-gray-900 px-6 py-3 rounded-full hover:bg-amber-300 transition"
-                        onClick={() => alert('Redirecting to scholarship application...')}
+                        onClick={() => navigate(`/checkout/${id}`, { state: { amount: scholarship.applicationFees } })}
                     >
                         Apply Scholarship
                     </button>
