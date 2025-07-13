@@ -71,10 +71,7 @@ export default function AddScholarship() {
             <label className="block font-medium mb-1">Location</label>
             <input name="location" className="input input-bordered w-full" onChange={handleChange} />
           </div>
-          <div>
-            <label className="block font-medium mb-1">World Rank</label>
-            <input name="worldRank" className="input input-bordered w-full" onChange={handleChange} />
-          </div>
+          
           <div>
             <label className="block font-medium mb-1">Application Deadline</label>
             <input type="date" name="applicationDeadline" className="input input-bordered w-full" onChange={handleChange} />
