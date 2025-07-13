@@ -16,6 +16,7 @@ import Login from './Component/Login/Login.jsx'
 import Register from './Component/Register/Register.jsx'
 import AllScholarship from './Component/AllScholarship/AllScholarship.jsx'
 import ScholarshipDetails from './Component/ScholarshipDetails/ScholarshipDetails.jsx'
+import AuthProvider from './context/AuthContext.jsx'
 
 
 
@@ -63,7 +64,9 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+     <AuthProvider>
      <RouterProvider router={router} />
+     </AuthProvider>
   </StrictMode>,
   
 )
