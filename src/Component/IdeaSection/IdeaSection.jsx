@@ -3,7 +3,7 @@ import React from 'react';
 
 const IdeaSection = () => {
     return (
-        <section className="container mx-auto px-4 md:px-12">
+        <section className="container mx-auto px-4 lg:mt-30 md:px-12">
             <div className=' text-center '>
                 <p className='water-mark lg:text-[110px] text-4xl lg:p-6 p-2 font-bold bg-gradient-to-b from-gray-400 to-gray-200 bg-clip-text text-transparent' >Follow your passion</p>
             </div>

@@ -18,6 +18,8 @@ import AllScholarship from './Component/AllScholarship/AllScholarship.jsx'
 import ScholarshipDetails from './Component/ScholarshipDetails/ScholarshipDetails.jsx'
 import AuthProvider from './context/AuthContext.jsx'
 import Checkout from './Component/Checkout.jsx';
+import UserDashboard from './Component/UserDashboard/UserDashboard.jsx'
+import ModeratorDashboard from './Component/ModeratorDashboard/ModeratorDashboard.jsx'
 
 
 const router = createBrowserRouter([
@@ -57,6 +59,15 @@ const router = createBrowserRouter([
       {
         path: '/checkout/:id',
         element: <Checkout />
+      },
+      {
+        path: '/user-dashboard',
+        element: <UserDashboard />
+      }
+      ,
+      {
+        path: '/moderator-dashboard',
+        element: <ModeratorDashboard />
       }
     ],
     errorElement: <ErrorPage />
