@@ -50,7 +50,7 @@ const AllScholarship = () => {
                             </p>
                             <p className="text-sm text-gray-700">
                                 <strong>Deadline:</strong> {scholar.
-                                    applicationDeadline || 'Not specified'}
+                                    applicationDeadline || 'Not specified'} 
                             </p>
                             <p className="text-sm text-gray-700">
                                 <strong>Subjects:</strong> {scholar.subjectCategory || 'N/A'}
