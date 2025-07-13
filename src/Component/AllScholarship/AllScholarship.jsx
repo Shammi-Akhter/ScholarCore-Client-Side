@@ -31,9 +31,11 @@ const AllScholarship = () => {
                         className="bg-white border border-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
                     >
                         {/* University Logo */}
-                        {scholar.image && (
+                        {scholar.
+universityLogo && (
                             <img
-                                src={scholar.image}
+                                src={scholar.
+                                    universityLogo}
                                 alt={`${scholar.universityName} logo`}
                                 className="w-full h-48 object-cover"
                             />

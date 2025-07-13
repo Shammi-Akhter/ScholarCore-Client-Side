@@ -38,8 +38,8 @@ const ScholarshipDetails = () => {
     return (
         <div className="max-w-5xl mx-auto px-4 py-10">
             <div className="bg-white shadow-lg rounded-xl overflow-hidden mb-8">
-                {scholarship.image && (
-                    <img src={scholarship.universityLogo} alt="University Logo" className="w-full h-64 object-cover" />
+                {scholarship.universityLogo && (
+                    <img src={scholarship.universityLogo} alt="University Logo" className="w-full h-96 object-fill" />
                 )}
                 <div className="p-6">
                     <h2 className="text-3xl font-bold text-gray-900 mb-3">{scholarship.universityName}</h2>

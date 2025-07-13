@@ -35,13 +35,15 @@ const TopScholarship = () => {
                         key={scholarship._id ? scholarship._id.toString() : index}
                         className="bg-white border rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
                     >
-                        {scholarship.image && (
-                            <img
-                                src={scholarship.image}
-                                alt={`${scholarship.universityName} logo`}
-                                className="w-full h-48 object-cover"
-                            />
-                        )}
+                        {scholarship.
+                            universityLogo && (
+                                <img
+                                    src={scholarship.
+                                        universityLogo}
+                                    alt={`${scholarship.universityName} logo`}
+                                    className="w-full h-48 object-cover"
+                                />
+                            )}
 
                         <div className="p-5 space-y-2">
                             <h3 className="text-xl font-semibold  text-gray-800">{scholarship.universityName || 'University Name'}</h3>
