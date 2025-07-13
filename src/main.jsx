@@ -20,6 +20,7 @@ import AuthProvider from './context/AuthContext.jsx'
 import Checkout from './Component/Checkout.jsx';
 import UserDashboard from './Component/UserDashboard/UserDashboard.jsx'
 import ModeratorDashboard from './Component/ModeratorDashboard/ModeratorDashboard.jsx'
+import AdminDashboard from './Component/AdminDashboard/AdminDashboard.jsx'
 
 
 const router = createBrowserRouter([
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: '/moderator-dashboard',
         element: <ModeratorDashboard />
+      },
+      {
+        path: '/admin-dashboard',
+        element: <AdminDashboard />
       }
     ],
     errorElement: <ErrorPage />
