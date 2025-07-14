@@ -1,4 +1,4 @@
-// src/pages/Login.jsx
+
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import {
@@ -20,7 +20,7 @@ const Login = () => {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  // 🔑 Helper to get JWT token from server
+  
   const getJWT = async (email) => {
     try {
       const res = await fetch('http://localhost:5000/jwt', {
@@ -40,7 +40,6 @@ const Login = () => {
     }
   };
 
-  // Email/Password login + JWT
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -51,7 +50,7 @@ const Login = () => {
       );
       const user = userCredential.user;
 
-      // 🔐 Get and store JWT token
+      
       await getJWT(user.email);
 
       toast.success('Logged in successfully');
@@ -61,13 +60,12 @@ const Login = () => {
     }
   };
 
-  // Google login + JWT
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      // 🔐 Get and store JWT token
+      
       await getJWT(user.email);
 
       toast.success('Logged in with Google');
@@ -82,7 +80,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <Toaster />
       <div className="bg-white shadow-lg rounded-2xl w-full max-w-md p-8">
-        {/* Header */}
+       
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-gray-800">
             Login to Your Account
@@ -92,7 +90,7 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Form */}
+      
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="block text-gray-700 font-medium mb-1">
@@ -135,7 +133,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-amber-200 hover:bg-amber-300 text-gray-900 font-semibold py-2 rounded-lg  transition"
           >
             Login
           </button>
@@ -147,7 +145,7 @@ const Login = () => {
           <hr className="flex-1 border-gray-300" />
         </div>
 
-        {/* Google Login */}
+        
         <button
           onClick={handleGoogleLogin}
           className="w-full border border-gray-300 flex items-center justify-center gap-2 py-2 rounded-lg hover:bg-gray-50 transition"

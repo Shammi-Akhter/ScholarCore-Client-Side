@@ -28,7 +28,7 @@ export default function MyApplications() {
     }
   };
 
-  // Helper to fetch scholarship details if needed
+ 
   const fetchScholarshipDetails = async (scholarshipId) => {
     try {
       const res = await fetch(`http://localhost:5000/scholarships/${scholarshipId}`);
@@ -43,7 +43,7 @@ export default function MyApplications() {
     <div className="overflow-x-auto">
       <table className=" w-full bg-white rounded-lg shadow">
         <thead>
-          <tr className="bg-amber-100">
+          <tr className="bg-amber-100 ">
             <th className="p-2">University Name</th>
             <th className="p-2">University Address</th>
             <th className="p-2">Feedback</th>
@@ -52,7 +52,6 @@ export default function MyApplications() {
             <th className="p-2">Fees</th>
             <th className="p-2">Service Charge</th>
             <th className="p-2">Status</th>
-        
             <th className="p-2">Applied At</th>
             <th className="p-2">Actions</th>
           </tr>
@@ -60,15 +59,15 @@ export default function MyApplications() {
         <tbody>
           {applications.map(app => (
             <tr key={app._id} className="border-b">
-              <td className="p-2">{app.universityName}</td>
-              <td className="p-2">{app.universityAddress || '-'}</td>
+              <td className="p-2 text-center">{app.universityName}</td>
+              <td className="p-2 text-center">{app.universityAddress || '-'}</td>
               <td className="p-2">{app.feedback || '-'}</td>
-              <td className="p-2">{app.subjectCategory}</td>
+              <td className="p-2 text-center">{app.subjectCategory}</td>
               <td className="p-2">{app.degree}</td>
-              <td className="p-2">${app.applicationFees || '-'}</td>
-              <td className="p-2">${app.serviceCharge || '-'}</td>
+              <td className="p-2 text-center">${app.applicationFees || '-'}</td>
+              <td className="p-2 text-center">${app.serviceCharge || '-'}</td>
               <td className="p-2">
-                <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                <span className={`px-2 py-1 rounded-sm text-xs font-semibold ${
                   app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                   app.status === 'processing' ? 'bg-blue-100 text-blue-800' :
                   app.status === 'completed' ? 'bg-green-100 text-green-800' :

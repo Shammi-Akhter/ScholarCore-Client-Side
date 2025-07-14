@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase.init";
 
-// 🆕 Static links
+
 const commonLinks = [
   { path: "/", label: "Home" },
   { path: "/all-scholarship", label: "All Scholarships" },
@@ -17,7 +17,6 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null); // 🆕
 
-  // Get role from backend
   const fetchUserRole = async (email) => {
     try {
       const res = await fetch(`http://localhost:5000/users/role/${email}`);
@@ -29,7 +28,7 @@ const Navbar = () => {
     }
   };
 
-  // Track login/logout changes
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -49,7 +48,7 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  // 🧠 Build role-based links
+ 
   const getNavItems = () => {
     const items = [...commonLinks];
 
@@ -99,7 +98,7 @@ const Navbar = () => {
 
         <div className="hidden lg:block">{renderLinks()}</div>
 
-        {/* Right side */}
+     
         <div className="hidden sm:flex items-center gap-4">
           {user ? (
             <>
@@ -130,13 +129,13 @@ const Navbar = () => {
             <>
               <NavLink
                 to="/login"
-                className="px-4 py-2 rounded-lg text-white border border-primary-600 text-primary-600 transition-colors hover:bg-primary-50 dark:hover:bg-primary-700/20"
+                className="px-4 py-2 rounded-lg text-white hover:bg-yellow-400 border border-primary-600 text-primary-600 transition-colors hover:bg-primary-50 dark:hover:bg-primary-700/20"
               >
                 Login
               </NavLink>
               <NavLink
                 to="/register"
-                className="px-4 py-2 rounded-lg bg-primary-600 text-white transition-colors hover:bg-primary-700"
+                className="px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-yellow-400 transition-colors hover:bg-primary-700"
               >
                 Register
               </NavLink>

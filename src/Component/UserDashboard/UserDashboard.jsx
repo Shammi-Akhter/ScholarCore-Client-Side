@@ -14,14 +14,14 @@ export default function UserDashboard() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-100 p-6 border-r">
+      
+      <aside className="w-64 bg-gray-100 p-4 border-r">
         <h2 className="text-xl font-bold mb-6">User Dashboard</h2>
         <nav className="flex flex-col gap-3">
           {TABS.map(t => (
             <button
               key={t.key}
-              className={`text-left px-4 py-2 rounded-lg font-medium ${tab === t.key ? 'bg-amber-400 text-white' : 'hover:bg-amber-100'}`}
+              className={`text-left px-4 py-2 rounded-lg font-medium ${tab === t.key ? 'bg-amber-400 text-white' : 'hover:bg-amber-200'}`}
               onClick={() => setTab(t.key)}
             >
               {t.label}
@@ -29,8 +29,8 @@ export default function UserDashboard() {
           ))}
         </nav>
       </aside>
-      {/* Main Content */}
-      <main className="flex-1 p-8">
+    
+      <main className="flex-1 p-2">
         {tab === 'profile' && <MyProfile />}
         {tab === 'applications' && <MyApplications />}
         {tab === 'reviews' && <MyReviews />}

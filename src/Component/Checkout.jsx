@@ -3,16 +3,15 @@ import { useLocation, useParams } from 'react-router';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import toast, { Toaster } from 'react-hot-toast';
-import ApplicationModal from './ApplicationModal'; // If you put it in a separate file
+import ApplicationModal from './ApplicationModal'; 
 import { AuthContext } from '../context/AuthContext';
 
-const stripePromise = loadStripe('pk_test_51RkNbAQxOVBEPStYGJFmSReLnPM7YKep3cSDiNrboy4eDttSz6tBMTWRwNohT5dFv8gcBfdlca9KfhScJ17SzS2X00M3b5sBeO'); // Replace with your Stripe publishable key
+const stripePromise = loadStripe('pk_test_VITE_STRIPE_PUBLISHABLE_KEY'); 
 
 function CheckoutForm({ amount, scholarshipId, setShowModal }) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
