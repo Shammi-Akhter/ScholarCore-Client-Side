@@ -16,7 +16,7 @@ export default function AllApplications() {
   const fetchApplications = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/applied-scholarships');
+      const res = await fetch('https://scholarcore.vercel.app/applied-scholarships');
       const data = await res.json();
       setApplications(data);
     } catch {
@@ -30,7 +30,7 @@ export default function AllApplications() {
     e.preventDefault();
     setFeedbackLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/applied-scholarships/${feedbackApp._id}`, {
+      const res = await fetch(`https://scholarcore.vercel.app/applied-scholarships/${feedbackApp._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ feedback: feedbackText }),
@@ -53,7 +53,7 @@ export default function AllApplications() {
   const handleCancel = async (app) => {
     if (!window.confirm('Are you sure you want to cancel this application?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/applied-scholarships/${app._id}`, {
+      const res = await fetch(`https://scholarcore.vercel.app/applied-scholarships/${app._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'rejected' }),

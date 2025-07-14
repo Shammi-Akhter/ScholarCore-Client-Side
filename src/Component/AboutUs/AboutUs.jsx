@@ -4,7 +4,7 @@ const AboutUs = () => {
   return (
     <section className="bg-white dark:bg-gray-900 py-16">
       <div className="container mx-auto px-4 max-w-7xl">
-        {/* Heading */}
+       
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white">
             About <span className="text-primary-600">ScholarCore</span>
@@ -14,7 +14,7 @@ const AboutUs = () => {
           </p>
         </div>
 
-        {/* Content */}
+       
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Image / Illustration */}
           <div>

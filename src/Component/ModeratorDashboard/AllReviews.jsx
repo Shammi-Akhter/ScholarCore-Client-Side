@@ -12,7 +12,7 @@ export default function AllReviews() {
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/reviews'); // changed from /all-reviews
+      const res = await fetch('https://scholarcore.vercel.app/reviews'); // changed from /all-reviews
       const data = await res.json();
       setReviews(data);
     } catch {
@@ -24,7 +24,7 @@ export default function AllReviews() {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this review?')) return;
-    const res = await fetch(`http://localhost:5000/reviews/${id}`, { method: 'DELETE' });
+    const res = await fetch(`https://scholarcore.vercel.app/reviews/${id}`, { method: 'DELETE' });
     if (res.ok) {
       toast.success('Review deleted');
       setReviews(reviews.filter(r => r._id !== id));

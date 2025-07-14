@@ -24,7 +24,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
         setLoading(true);
         setFetchError('');
         try {
-          const res = await fetch(`http://localhost:5000/scholarships/${application.scholarshipId}`);
+          const res = await fetch(`https://scholarcore.vercel.app/scholarships/${application.scholarshipId}`);
           if (res.ok) {
             const data = await res.json();
             setScholarshipInfo({
@@ -93,8 +93,8 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
       return;
     }
     const url = isEdit
-      ? `http://localhost:5000/reviews/${review._id}`
-      : 'http://localhost:5000/reviews';
+      ? `https://scholarcore.vercel.app/reviews/${review._id}`
+      : 'https://scholarcore.vercel.app/reviews';
     const method = isEdit ? 'PUT' : 'POST';
     const res = await fetch(url, {
       method,

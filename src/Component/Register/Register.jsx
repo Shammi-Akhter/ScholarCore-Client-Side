@@ -26,7 +26,7 @@ const Register = () => {
      ───────────────────────── */
   const getJWT = async (email, uid) => {
     try {
-      const res = await fetch('http://localhost:5000/jwt', {
+      const res = await fetch('https://scholarcore.vercel.app/jwt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, uid }),
@@ -38,7 +38,7 @@ const Register = () => {
         toast.error('Failed to get token');
       }
     } catch (err) {
-      console.error(err);
+      
       toast.error('Token error');
     }
   };
@@ -48,7 +48,7 @@ const Register = () => {
      ───────────────────────── */
   const saveUserInDB = async ({ email, displayName, photoURL, uid }) => {
     try {
-      const res = await fetch('http://localhost:5000/users', {
+      const res = await fetch('https://scholarcore.vercel.app/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, displayName, photoURL, uid }),
@@ -60,7 +60,7 @@ const Register = () => {
         toast.error('Couldn’t save user in DB');
       }
     } catch (err) {
-      console.error(err);
+      
       toast.error('DB save error');
     }
   };

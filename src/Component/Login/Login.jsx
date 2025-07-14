@@ -23,7 +23,7 @@ const Login = () => {
   
   const getJWT = async (email) => {
     try {
-      const res = await fetch('http://localhost:5000/jwt', {
+      const res = await fetch('https://scholarcore.vercel.app/jwt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

@@ -6,7 +6,7 @@ const AllScholarship = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/scholarships')
+        fetch('https://scholarcore.vercel.app/scholarships')
             .then(res => res.json())
             .then(data => {
                 setAllScholarships(data);

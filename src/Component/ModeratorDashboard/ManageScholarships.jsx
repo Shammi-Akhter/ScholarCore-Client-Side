@@ -31,7 +31,7 @@ export default function ManageScholarships() {
   const fetchScholarships = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/scholarships');
+      const res = await fetch('https://scholarcore.vercel.app/scholarships');
       const data = await res.json();
       setScholarships(data);
     } catch {
@@ -43,7 +43,7 @@ export default function ManageScholarships() {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this scholarship?')) return;
-    const res = await fetch(`http://localhost:5000/scholarships/${id}`, { method: 'DELETE' });
+    const res = await fetch(`https://scholarcore.vercel.app/scholarships/${id}`, { method: 'DELETE' });
     if (res.ok) {
       toast.success('Scholarship deleted');
       setScholarships(scholarships.filter(s => s._id !== id));
@@ -85,7 +85,7 @@ export default function ManageScholarships() {
     }
     setEditLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/scholarships/${editScholarship._id}`, {
+      const res = await fetch(`https://scholarcore.vercel.app/scholarships/${editScholarship._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

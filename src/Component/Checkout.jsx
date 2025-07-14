@@ -16,7 +16,7 @@ function CheckoutForm({ amount, scholarshipId, setShowModal }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/create-payment-intent', {
+      const res = await fetch('https://scholarcore.vercel.app/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: Math.round(Number(amount) * 100) }),
@@ -35,7 +35,7 @@ function CheckoutForm({ amount, scholarshipId, setShowModal }) {
       if (result.error) {
         toast.error(result.error.message);
       } else if (result.paymentIntent.status === 'succeeded') {
-        console.log('Payment succeeded!');
+        
         toast.success('Payment successful! You can now apply for the scholarship.');
         setShowModal(true);
       }
@@ -79,7 +79,7 @@ export default function Checkout() {
   useEffect(() => {
     async function fetchScholarship() {
       try {
-        const res = await fetch(`http://localhost:5000/scholarships/${scholarshipId}`);
+        const res = await fetch(`https://scholarcore.vercel.app/scholarships/${scholarshipId}`);
         const data = await res.json();
         setScholarship(data);
       } catch {

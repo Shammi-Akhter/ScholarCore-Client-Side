@@ -13,7 +13,7 @@ export default function MyApplications() {
 
   useEffect(() => {
     if (user?.uid) {
-      fetch(`http://localhost:5000/applied-scholarships?userId=${user.uid}`)
+      fetch(`https://scholarcore.vercel.app/applied-scholarships?userId=${user.uid}`)
         .then(res => res.json())
         .then(data => setApplications(data));
     }
@@ -21,7 +21,7 @@ export default function MyApplications() {
 
   const handleCancel = async (appId) => {
     if (!window.confirm('Are you sure you want to cancel this application?')) return;
-    const res = await fetch(`http://localhost:5000/applied-scholarships/${appId}`, { method: 'DELETE' });
+    const res = await fetch(`https://scholarcore.vercel.app/applied-scholarships/${appId}`, { method: 'DELETE' });
     if (res.ok) {
       setApplications(applications.filter(app => app._id !== appId));
       toast.success('Application cancelled');
@@ -31,7 +31,7 @@ export default function MyApplications() {
  
   const fetchScholarshipDetails = async (scholarshipId) => {
     try {
-      const res = await fetch(`http://localhost:5000/scholarships/${scholarshipId}`);
+      const res = await fetch(`https://scholarcore.vercel.app/scholarships/${scholarshipId}`);
       if (!res.ok) return null;
       return await res.json();
     } catch {

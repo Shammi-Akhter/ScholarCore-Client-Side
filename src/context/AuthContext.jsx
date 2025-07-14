@@ -6,11 +6,11 @@ export const AuthContext = createContext();
 
 const fetchUserRole = async (email) => {
   try {
-    const res = await fetch(`http://localhost:5000/users/role/${email}`);
+    const res = await fetch(`https://scholarcore.vercel.app/users/role/${email}`);
     const data = await res.json();
     return data.role || 'user';
   } catch (err) {
-    console.error('Role fetch error:', err);
+    
     return 'user';
   }
 };

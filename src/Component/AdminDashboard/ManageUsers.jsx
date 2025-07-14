@@ -15,7 +15,7 @@ export default function ManageUsers() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/users');
+      const res = await fetch('https://scholarcore.vercel.app/users');
       const data = await res.json();
       setUsers(data);
     } catch {
@@ -28,7 +28,7 @@ export default function ManageUsers() {
   const handleRoleChange = async (user, newRole) => {
     if (user.role === newRole) return;
     try {
-      const res = await fetch(`http://localhost:5000/users/${user._id}`, {
+      const res = await fetch(`https://scholarcore.vercel.app/users/${user._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ role: newRole }),
@@ -47,7 +47,7 @@ export default function ManageUsers() {
   const handleDelete = async (user) => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/users/${user._id}`, { method: 'DELETE' });
+      const res = await fetch(`https://scholarcore.vercel.app/users/${user._id}`, { method: 'DELETE' });
       if (res.ok) {
         toast.success('User deleted!');
         setUsers(users.filter(u => u._id !== user._id));

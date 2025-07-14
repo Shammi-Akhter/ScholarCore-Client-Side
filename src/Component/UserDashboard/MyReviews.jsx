@@ -10,7 +10,7 @@ export default function MyReviews() {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/reviews?email=${user.email}`)
+      fetch(`https://scholarcore.vercel.app/reviews?email=${user.email}`)
         .then(res => res.json())
         .then(data => setReviews(data));
     }
@@ -18,7 +18,7 @@ export default function MyReviews() {
 
   const handleDelete = async (reviewId) => {
     if (!window.confirm('Delete this review?')) return;
-    const res = await fetch(`http://localhost:5000/reviews/${reviewId}`, { method: 'DELETE' });
+    const res = await fetch(`https://scholarcore.vercel.app/reviews/${reviewId}`, { method: 'DELETE' });
     if (res.ok) {
       setReviews(reviews.filter(r => r._id !== reviewId));
       toast.success('Review deleted');

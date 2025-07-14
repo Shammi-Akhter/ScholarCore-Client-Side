@@ -15,7 +15,7 @@ export default function AddScholarship() {
     setLoading(true);
     try {
       const payload = { ...form };
-      const res = await fetch('http://localhost:5000/scholarships', {
+      const res = await fetch('https://scholarcore.vercel.app/scholarships', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

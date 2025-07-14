@@ -7,7 +7,7 @@ const TopScholarship = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:5000/scholarships')
+        fetch('https://scholarcore.vercel.app/scholarships')
             .then(res => res.json())
             .then(data => {
                 const topRated = data
@@ -18,7 +18,7 @@ const TopScholarship = () => {
                 setLoading(false);
             })
             .catch(err => {
-                console.error('Error fetching scholarships:', err);
+               
                 setLoading(false);
             });
     }, []);

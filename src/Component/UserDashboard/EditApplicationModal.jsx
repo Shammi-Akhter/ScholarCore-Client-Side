@@ -19,7 +19,7 @@ export default function EditApplicationModal({ open, onClose, application }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:5000/applied-scholarships/${application._id}`, {
+    const res = await fetch(`https://scholarcore.vercel.app/applied-scholarships/${application._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),

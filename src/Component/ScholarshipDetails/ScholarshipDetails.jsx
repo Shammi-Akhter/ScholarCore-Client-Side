@@ -12,14 +12,14 @@ const ScholarshipDetails = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/scholarships/${id}`)
+        fetch(`https://scholarcore.vercel.app/scholarships/${id}`)
             .then(res => res.json())
             .then(data => {
                 setScholarship(data);
                 setLoading(false);
             });
 
-        fetch(`http://localhost:5000/reviews/${id}`)
+        fetch(`https://scholarcore.vercel.app/reviews/${id}`)
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [id]);
