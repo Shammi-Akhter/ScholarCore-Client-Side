@@ -87,6 +87,12 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
       userImage: user?.photoURL || '',
       userEmail: user?.email || '',
     };
+    // Defensive check: log and validate scholarshipId
+    console.log('Submitting review for scholarshipId:', reviewData.scholarshipId);
+    if (!reviewData.scholarshipId || typeof reviewData.scholarshipId !== 'string' || reviewData.scholarshipId.length < 10) {
+      toast.error('Invalid or missing scholarship ID. Cannot submit review.');
+      return;
+    }
     // Validation: check all required fields
     if (!reviewData.scholarshipName || !reviewData.universityName || !reviewData.scholarshipId || !reviewData.userName || !reviewData.userEmail || !reviewData.rating || !reviewData.comment || !reviewData.reviewDate) {
       toast.error('All fields are required.');
