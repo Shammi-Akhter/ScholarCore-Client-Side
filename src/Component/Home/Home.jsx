@@ -4,6 +4,7 @@ import Banner from '../Banner/Banner'
 import TopScholarship from '../TopScholarship/TopScholarship'
 import Feature from '../Feature/Feature'
 import IdeaSection from '../IdeaSection/IdeaSection'
+import ThirdSection from '../ThirdSection/ThirdSection'
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
     <Banner/>
     <TopScholarship/>
     <IdeaSection/>
+    <ThirdSection/>
     <Feature/>
    
     <Outlet/>

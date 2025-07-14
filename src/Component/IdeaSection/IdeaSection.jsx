@@ -7,16 +7,13 @@ const IdeaSection = () => {
             <div className=' text-center '>
                 <p className='water-mark lg:text-[110px] text-4xl lg:p-6 p-2 font-bold bg-gradient-to-b from-gray-400 to-gray-200 bg-clip-text text-transparent' >Follow your passion</p>
             </div>
-            <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-10">
-
+            <div className="mx-auto flex flex-col-reverse lg:flex-row items-center gap-10">
                 <div className="lg:w-1/2 text-center lg:text-left px-10 mt-[-50px]">
-
                     <h3 className="text-3xl md:text-2xl font-bold text-gray-900 z-10 relative lg:pr-5">
                        Empower Your Journey — Learn What You Love
                     </h3>
                     <p className="text-gray-900 mt-4 z-10 relative lg:pr-10">
-                    Discover a world where education meets inspiration. Our Scholar Management System is designed to help you follow your passion, choose the subjects that spark your curiosity, and connect with mentors who fuel your growth. Whether you're a student or a lifelong learner, we provide the tools to turn your ambition into achievement.
-                        
+                    Discover a world where education meets inspiration. Our Scholar Management System is designed to help you follow your passion, choose the subjects that spark your curiosity, and connect with mentors who fuel your growth. Whether you're a student or a lifelong learner, we provide the tools to turn your ambition into achievement.                        
                     </p>
                 </div>
 

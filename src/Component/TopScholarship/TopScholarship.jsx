@@ -33,7 +33,7 @@ const TopScholarship = () => {
                 {scholarships.map((scholarship, index) => (
                     <div
                         key={scholarship._id ? scholarship._id.toString() : index}
-                        className="bg-white border rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+                        className="bg-white border-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
                     >
                         {scholarship.
                             universityLogo && (

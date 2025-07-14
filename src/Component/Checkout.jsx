@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import ApplicationModal from './ApplicationModal'; 
 import { AuthContext } from '../context/AuthContext';
 
-const stripePromise = loadStripe('pk_test_VITE_STRIPE_PUBLISHABLE_KEY'); 
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY); 
 
 function CheckoutForm({ amount, scholarshipId, setShowModal }) {
   const stripe = useStripe();
