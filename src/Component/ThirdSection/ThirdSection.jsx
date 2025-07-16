@@ -2,7 +2,7 @@ import React from 'react';
 
 const ThirdSection = () => {
   return (
-    <section className="px-4 bg-gray-50">
+    <div className="px-2 sm:px-4 md:px-8">
       <div className="container mx-auto text-center md:mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
         Explore Our Scholarship Advantages
@@ -28,7 +28,7 @@ const ThirdSection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

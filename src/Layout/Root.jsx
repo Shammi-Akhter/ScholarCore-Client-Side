@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 
 const Root = () => {
     return (
-        <div>
+        <div className="w-full min-h-screen flex flex-col">
               <Toaster position="top-center" reverseOrder={false} />
             <Navbar/>
             <Outlet/>

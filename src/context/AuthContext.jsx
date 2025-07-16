@@ -10,7 +10,6 @@ const fetchUserRole = async (email) => {
     const data = await res.json();
     return data.role || 'user';
   } catch (err) {
-    
     return 'user';
   }
 };
@@ -24,12 +23,14 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser?.email) {
+        setLoading(true); // Start loading while fetching role
         const userRole = await fetchUserRole(currentUser.email);
         setRole(userRole);
+        setLoading(false); // Only stop loading after role is fetched
       } else {
         setRole(null);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();

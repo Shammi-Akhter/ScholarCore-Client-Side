@@ -50,13 +50,13 @@ export default function MyApplications() {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto px-2 sm:px-4 md:px-8">
       {applications.length === 0 ? (
         <div className="text-center text-gray-500 py-10 text-lg font-semibold">You have no applications yet.</div>
       ) : (
         <table className=" w-full bg-white rounded-lg shadow">
           <thead>
-            <tr className="bg-amber-100 ">
+            <tr className="bg-amber-100 text-center">
               <th className="p-2">University Name</th>
               <th className="p-2">University Address</th>
               <th className="p-2">Feedback</th>
@@ -71,15 +71,15 @@ export default function MyApplications() {
           </thead>
           <tbody>
             {applications.map(app => (
-              <tr key={app._id} className="border-b">
-                <td className="p-2 text-center">{app.universityName}</td>
-                <td className="p-2 text-center">{app.location || '-'}</td>
-                <td className="p-2">{app.feedback || '-'}</td>
-                <td className="p-2 text-center">{app.subjectCategory}</td>
-                <td className="p-2">{app.degree}</td>
-                <td className="p-2 text-center">${app.applicationFees || '-'}</td>
-                <td className="p-2 text-center">${app.serviceCharge || '-'}</td>
-                <td className="p-2">
+              <tr key={app._id} className="border-b text-center">
+                <td className="p-2 align-middle">{app.universityName}</td>
+                <td className="p-2 align-middle">{app.location || '-'}</td>
+                <td className="p-2 align-middle">{app.feedback || '-'}</td>
+                <td className="p-2 align-middle">{app.subjectCategory}</td>
+                <td className="p-2 align-middle">{app.degree}</td>
+                <td className="p-2 align-middle">${app.applicationFees || '-'}</td>
+                <td className="p-2 align-middle">${app.serviceCharge || '-'}</td>
+                <td className="p-2 align-middle">
                   <span className={`px-2 py-1 rounded-sm text-xs font-semibold ${
                     app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                     app.status === 'processing' ? 'bg-blue-100 text-blue-800' :
@@ -89,9 +89,8 @@ export default function MyApplications() {
                     {app.status || 'pending'}
                   </span>
                 </td>
-               
-                <td className="p-2">{app.appliedAt ? new Date(app.appliedAt).toLocaleDateString() : '-'}</td>
-                <td className="p-2 flex gap-2">
+                <td className="p-2 align-middle">{app.appliedAt ? new Date(app.appliedAt).toLocaleDateString() : '-'}</td>
+                <td className="p-2 align-middle flex gap-2 justify-center">
                   <button className="btn btn-xs bg-blue-100 text-blue-700" onClick={() => window.open(`/scholarship-details/${app.scholarshipId}`)}>Details</button>
                   <button
                     className="btn btn-xs bg-green-100 text-green-700"

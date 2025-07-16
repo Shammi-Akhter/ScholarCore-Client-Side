@@ -11,6 +11,11 @@ export default function AllApplications() {
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [pendingCancelApp, setPendingCancelApp] = useState(null);
+  const [filterStatus, setFilterStatus] = useState('');
+  const [filterDegree, setFilterDegree] = useState('');
+  const [filterCategory, setFilterCategory] = useState('');
+  const [sortBy, setSortBy] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     fetchApplications();
@@ -77,46 +82,105 @@ export default function AllApplications() {
     setPendingCancelApp(null);
   };
 
+  // Filtering and sorting logic
+  let filtered = applications.filter(app => {
+    return (
+      (!filterStatus || app.status === filterStatus) &&
+      (!filterDegree || app.degree === filterDegree) &&
+      (!filterCategory || app.scholarshipCategory === filterCategory)
+    );
+  });
+
+  if (sortBy) {
+    filtered = [...filtered].sort((a, b) => {
+      let aVal = a[sortBy] || '';
+      let bVal = b[sortBy] || '';
+      if (sortBy === 'appliedAt' && aVal && bVal) {
+        aVal = new Date(aVal);
+        bVal = new Date(bVal);
+      }
+      if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
   return (
-    <div>
+    <div className="px-2 sm:px-4 md:px-8">
       <h2 className="text-xl font-bold mb-4">All Applied Scholarships</h2>
+      {/* Filter and Sort Controls */}
+      <div className="flex flex-wrap gap-4 mb-4 items-center">
+        <div>
+          <label className="mr-2 font-medium">Status:</label>
+          <select className="input input-bordered" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+            <option value="">All</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+            <option value="processing">Processing</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <div>
+          <label className="mr-2 font-medium">Degree:</label>
+          <select className="input input-bordered" value={filterDegree} onChange={e => setFilterDegree(e.target.value)}>
+            <option value="">All</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Bachelor">Bachelor</option>
+            <option value="Masters">Masters</option>
+          </select>
+        </div>
+     
+        <div>
+          <label className="mr-2 font-medium">Sort By:</label>
+          <select className="input input-bordered" value={sortBy} onChange={e => setSortBy(e.target.value)}>
+            <option value="">None</option>
+            <option value="universityName">University Name</option>
+            <option value="degree">Degree</option>
+            <option value="appliedAt">Application Date</option>
+          </select>
+         
+        </div>
+        <button className="btn btn-xs ml-2" onClick={() => { setFilterStatus(''); setFilterDegree(''); setFilterCategory(''); setSortBy(''); setSortOrder('asc'); }}>Reset</button>
+      </div>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <table className="min-w-full bg-white rounded-lg shadow">
-          <thead>
-            <tr className="bg-amber-100">
-              <th className="p-2">University Name</th>
-              <th className="p-2">Degree</th>
-              <th className="p-2">Scholarship Category</th>
-              <th className="p-2">Status</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications.map(app => (
-              <tr key={app._id}>
-                <td className="p-2">{app.universityName}</td>
-                <td className="p-2">{app.degree}</td>
-                <td className="p-2">{app.scholarshipCategory}</td>
-                <td className="p-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                    app.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
-                    {app.status}
-                  </span>
-                </td>
-                <td className="p-2 flex gap-2">
-                  <button className="btn btn-xs bg-blue-100 text-blue-700" onClick={() => setDetailsApp(app)}>Details</button>
-                  <button className="btn btn-xs bg-green-100 text-green-700" onClick={() => { setFeedbackApp(app); setFeedbackText(app.feedback || ''); }}>Feedback</button>
-                  <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleCancel(app)}>Cancel</button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white rounded-lg shadow">
+            <thead>
+              <tr className="bg-amber-100 text-center">
+                <th className="p-2">University Name</th>
+                <th className="p-2">Degree</th>
+                <th className="p-2">Scholarship Category</th>
+                <th className="p-2">Status</th>
+                <th className="p-2">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map(app => (
+                <tr key={app._id} className="text-center">
+                  <td className="p-2 align-middle">{app.universityName}</td>
+                  <td className="p-2 align-middle">{app.degree}</td>
+                  <td className="p-2 align-middle">{app.scholarshipCategory}</td>
+                  <td className="p-2 align-middle">
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                      app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                      app.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                      'bg-gray-100 text-gray-800'
+                    }`}>
+                      {app.status}
+                    </span>
+                  </td>
+                  <td className="p-2 align-middle flex gap-2 justify-center">
+                    <button className="btn btn-xs bg-blue-100 text-blue-700" onClick={() => setDetailsApp(app)}>Details</button>
+                    <button className="btn btn-xs bg-green-100 text-green-700" onClick={() => { setFeedbackApp(app); setFeedbackText(app.feedback || ''); }}>Feedback</button>
+                    <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleCancel(app)}>Cancel</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
       {/* Details Modal */}
       {detailsApp && (

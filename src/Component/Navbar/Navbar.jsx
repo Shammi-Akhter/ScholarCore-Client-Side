@@ -146,7 +146,7 @@ const Navbar = () => {
         <button
           type="button"
           aria-label="Toggle menu"
-          className="inline-flex lg:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600"
+          className="inline-flex lg:hidden p-2 rounded-md focus:outline-none bg-white focus:ring-2 focus:ring-primary-600"
           onClick={() => setOpen((prev) => !prev)}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -155,10 +155,18 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="lg:hidden bg-white dark:bg-gray-900 shadow-md border-t border-gray-200 dark:border-gray-700">
-          <div className="container mx-auto px-4 py-4 space-y-6">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-start justify-center lg:hidden">
+          <div className="bg-gray-800 dark:bg-gray-900 w-full max-w-xs sm:max-w-sm p-6 mt-16 rounded-lg shadow-lg relative animate-fadeIn">
+            <button
+              type="button"
+              aria-label="Close menu"
+              className="absolute top-4 right-4 text-white text-2xl"
+              onClick={() => setOpen(false)}
+            >
+              <X className="h-7 w-7" />
+            </button>
             {renderLinks()}
-            <div className="flex flex-col gap-3 pt-2 sm:hidden">
+            <div className="flex flex-col gap-3 pt-2">
               {user ? (
                 <>
                   <button
@@ -184,12 +192,14 @@ const Navbar = () => {
                   <NavLink
                     to="/login"
                     className="w-full text-center px-4 py-2 rounded-lg text-white border border-primary-600 text-primary-600 transition-colors hover:bg-primary-50 dark:hover:bg-primary-700/20"
+                    onClick={() => setOpen(false)}
                   >
                     Login
                   </NavLink>
                   <NavLink
                     to="/register"
                     className="w-full text-center px-4 py-2 rounded-lg bg-primary-600 text-white transition-colors hover:bg-primary-700"
+                    onClick={() => setOpen(false)}
                   >
                     Register
                   </NavLink>

@@ -57,7 +57,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative p-0">
         <button className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700 transition" onClick={onClose}>&times;</button>
         <div className="px-8 pt-8 pb-4 max-h-[90vh] overflow-y-auto rounded-2xl">

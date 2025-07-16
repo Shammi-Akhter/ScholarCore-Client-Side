@@ -36,13 +36,13 @@ export default function MyReviews() {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto px-2 sm:px-4 md:px-8">
       {reviews.length === 0 ? (
         <div className="text-center text-gray-500 py-10 text-lg font-semibold">You have no reviews yet.</div>
       ) : (
         <table className="min-w-full bg-white rounded-lg shadow">
           <thead>
-            <tr className="bg-amber-100">
+            <tr className="bg-amber-100 text-center">
               <th className="p-2">Scholarship Name</th>
               <th className="p-2">University Name</th>
               <th className="p-2">Comment</th>
@@ -52,12 +52,12 @@ export default function MyReviews() {
           </thead>
           <tbody>
             {reviews.map(r => (
-              <tr key={r._id} className="border-b">
-                <td className="p-2">{r.scholarshipName}</td>
-                <td className="p-2">{r.universityName}</td>
-                <td className="p-2">{r.comment}</td>
-                <td className="p-2">{r.reviewDate}</td>
-                <td className="p-2 flex gap-2">
+              <tr key={r._id} className="border-b text-center">
+                <td className="p-2 align-middle">{r.scholarshipName}</td>
+                <td className="p-2 align-middle">{r.universityName}</td>
+                <td className="p-2 align-middle">{r.comment}</td>
+                <td className="p-2 align-middle">{r.reviewDate}</td>
+                <td className="p-2 align-middle flex gap-2 justify-center">
                   <button className="btn btn-xs bg-green-100 text-green-700" onClick={() => setEditReview(r)}>Edit</button>
                   <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleDelete(r._id)}>Delete</button>
                 </td>

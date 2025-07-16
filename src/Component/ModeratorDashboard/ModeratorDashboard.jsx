@@ -23,9 +23,9 @@ export default function ModeratorDashboard() {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">
       {/* Sidebar */}
-      <aside className="w-70 bg-gray-100 p-6 border-r">
+      <aside className="w-full md:w-64 bg-gray-100 p-6 border-r md:border-b-0 border-b md:rounded-none rounded-b-xl">
         <h2 className="text-xl font-bold mb-6">Moderator Dashboard</h2>
         <nav className="flex flex-col gap-3">
           {tabs.map(tab => (
@@ -40,7 +40,7 @@ export default function ModeratorDashboard() {
         </nav>
       </aside>
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-4 md:p-8">
         {activeTab === 'profile' && <MyProfile />}
         {activeTab === 'scholarships' && <ManageScholarships />}
         {activeTab === 'reviews' && <AllReviews />}

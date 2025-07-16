@@ -44,7 +44,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="container mx-auto w-full h-[80vh] overflow-hidden ">
+    <div className="px-2 sm:px-4 md:px-8">
       <Slider {...settings}>
         {bannerData.map((slide, idx) => (
           <div key={idx} className="relative w-full h-[70vh] flex items-center justify-center">

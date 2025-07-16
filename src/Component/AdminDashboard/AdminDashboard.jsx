@@ -6,14 +6,16 @@ import ManageScholarships from './ManageScholarships';
 import ManageApplications from './ManageApplications';
 import ManageUsers from './ManageUsers';
 import ManageReviews from './ManageReviews';
+import Analytics from './Analytics';
 
 const tabs = [
   { key: 'profile', label: 'Admin Profile' },
   { key: 'add', label: 'Add Scholarship' },
-  { key: 'scholarships', label: 'Manage Scholarship' },
-  { key: 'applications', label: 'Manage Applied Application' },
+  { key: 'scholarships', label: 'Manage Scholarships' },
   { key: 'users', label: 'Manage Users' },
   { key: 'reviews', label: 'Manage Review' },
+  { key: 'applications', label: 'Manage Applied Application' },
+  { key: 'analytics', label: 'Analytics' },
 ];
 
 export default function AdminDashboard() {
@@ -25,9 +27,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-100 p-6 border-r">
+      <aside className="w-full md:w-64 bg-gray-100 p-6 border-r md:border-b-0 border-b md:rounded-none rounded-b-xl">
         <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
         <nav className="flex flex-col gap-3">
           {tabs.map(tab => (
@@ -42,13 +44,14 @@ export default function AdminDashboard() {
         </nav>
       </aside>
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-4 md:p-8">
         {activeTab === 'profile' && <AdminProfile />}
         {activeTab === 'add' && <AddScholarship />}
         {activeTab === 'scholarships' && <ManageScholarships />}
         {activeTab === 'applications' && <ManageApplications />}
         {activeTab === 'users' && <ManageUsers />}
         {activeTab === 'reviews' && <ManageReviews />}
+        {activeTab === 'analytics' && <Analytics />}
       </main>
     </div>
   );

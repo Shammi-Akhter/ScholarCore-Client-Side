@@ -9,9 +9,7 @@ const Footer = () => {
                 <nav className="grid grid-flow-col gap-4">
                     <NavLink to="/about-us" className='text-white'>About us</NavLink>
                     <NavLink to="/contact" className='text-white'>Contact</NavLink>
-                    <NavLink to="/" className='text-white'>Jobs</NavLink>
-                    <NavLink to="/" className='text-white'>Press kit</NavLink>
-
+                   
 
                 </nav>
                 <nav>

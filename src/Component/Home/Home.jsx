@@ -8,17 +8,16 @@ import ThirdSection from '../ThirdSection/ThirdSection'
 
 const Home = () => {
   return (
-    <>
-  
-    <Banner/>
-    <TopScholarship/>
-    <IdeaSection/>
-    <ThirdSection/>
-    <Feature/>
+    <div className="px-2 sm:px-4 md:px-8">
+      <Banner/>
+      <TopScholarship/>
+      <IdeaSection/>
+      <ThirdSection/>
+      <Feature/>
    
-    <Outlet/>
-    
-    </>
+      <Outlet/>
+      
+    </div>
   )
 }
 

@@ -68,8 +68,8 @@ export default function ManageUsers() {
   const filteredUsers = roleFilter === 'all' ? users : users.filter(u => u.role === roleFilter);
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
+    <div className="px-2 sm:px-4 md:px-8">
+      <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
         <h2 className="text-xl font-bold">Manage Users</h2>
         <div>
           <label className="mr-2 font-medium">Filter by Role:</label>
@@ -86,41 +86,40 @@ export default function ManageUsers() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <table className="min-w-full bg-white rounded-lg shadow">
-          <thead>
-            <tr className="bg-amber-100">
-              <th className="p-2">User Name</th>
-              <th className="p-2">User Email</th>
-              <th className="p-2">User Role</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map(user => (
-              <tr key={user._id}>
-                <td className="p-2">{user.displayName || '-'}</td>
-                <td className="p-2">{user.email}</td>
-                <td className="p-2">
-                  <div className="relative inline-block">
-                    <button className="px-3 py-1 bg-gray-100 rounded cursor-pointer font-semibold" tabIndex={0}>
-                      {user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'Unknown'}
-                    </button>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white rounded-lg shadow">
+            <thead>
+              <tr className="bg-amber-100 text-center">
+                <th className="p-2">User Name</th>
+                <th className="p-2">User Email</th>
+                <th className="p-2">User Role</th>
+                <th className="p-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map(user => (
+                <tr key={user._id} className="text-center">
+                  <td className="p-2 align-middle">{user.displayName || '-'}</td>
+                  <td className="p-2 align-middle">{user.email}</td>
+                  <td className="p-2 align-middle">
                     <select
-                      className="absolute left-0 top-full mt-1 input input-bordered w-32 z-10"
+                      className="input input-bordered w-full"
                       value={user.role || ''}
                       onChange={e => handleRoleChange(user, e.target.value)}
                     >
-                      {ROLES.map(r => <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>)}
+                      {ROLES.map(r => (
+                        <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>
+                      ))}
                     </select>
-                  </div>
-                </td>
-                <td className="p-2">
-                  <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleDelete(user)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                  <td className="p-2 align-middle">
+                    <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleDelete(user)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
       <ConfirmModal
         open={confirmOpen}

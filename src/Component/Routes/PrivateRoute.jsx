@@ -1,15 +1,13 @@
 import { Navigate, useLocation } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 
-
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, role, loading } = useAuth();
   const location = useLocation();
-  const token = localStorage.getItem("access-token");
-console.log(user, loading, token);
   if (loading) return <div>Loading...</div>;
 
-  if (user && token) return children;
+  // Allow access if logged in and role is user, admin, or moderator
+  if (user && ["user", "admin", "moderator"].includes(role)) return children;
 
   return <Navigate to="/login" state={{ from: location }} replace />;
 };

@@ -50,7 +50,7 @@ const AllScholarship = () => {
     if (loading) return <p className="text-center mt-10 text-lg font-medium">Loading...</p>;
 
     return (
-        <div className="container mx-auto px-4 py-10">
+        <div className="px-2 sm:px-4 md:px-8">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">All Scholarships</h2>
 
             {/* Search Box */}

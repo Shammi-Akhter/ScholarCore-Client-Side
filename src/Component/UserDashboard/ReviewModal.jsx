@@ -125,7 +125,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
   // Only block if adding a new review and scholarshipId is missing
   if (!isEdit && !application?.scholarshipId) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
         <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative">
           <button className="absolute top-2 right-2 text-xl" onClick={onClose}>&times;</button>
           <h2 className="text-2xl font-bold mb-4">Add Review</h2>
@@ -136,7 +136,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
       <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative">
         <button className="absolute top-2 right-2 text-xl" onClick={onClose}>&times;</button>
         <h2 className="text-2xl font-bold mb-4">{isEdit ? 'Edit Review' : 'Add Review'}</h2>

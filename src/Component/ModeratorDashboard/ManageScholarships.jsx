@@ -122,39 +122,43 @@ export default function ManageScholarships() {
   };
 
   return (
-    <div>
+    <div className="px-2 sm:px-4 md:px-8">
       <h2 className="text-xl font-bold mb-4">Manage Scholarships</h2>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <table className="min-w-full bg-white rounded-lg shadow">
-          <thead>
-            <tr className="bg-amber-100">
-              <th className="p-2">Scholarship Name</th>
-              <th className="p-2">University Name</th>
-              <th className="p-2">Subject Category</th>
-              <th className="p-2">Degree</th>
-              <th className="p-2">Application Fees</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {scholarships.map(s => (
-              <tr key={s._id}>
-                <td className="p-2">{s.scholarshipName || s.name}</td>
-                <td className="p-2">{s.universityName}</td>
-                <td className="p-2">{s.subjectCategory}</td>
-                <td className="p-2">{s.degree}</td>
-                <td className="p-2">{s.applicationFees}</td>
-                <td className="p-2 flex gap-2">
-                  <button className="btn btn-xs bg-blue-100 text-blue-700" onClick={() => setDetailsScholarship(s)}>Details</button>
-                  <button className="btn btn-xs bg-green-100 text-green-700" onClick={() => openEditModal(s)}>Edit</button>
-                  <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleDelete(s._id)}>Delete</button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white rounded-lg shadow">
+            <thead>
+              <tr className="bg-amber-100">
+                <th className="p-2 text-center">Scholarship Name</th>
+                <th className="p-2 text-center">University Name</th>
+                <th className="p-2 text-center">Subject Category</th>
+                <th className="p-2 text-center">Degree</th>
+                <th className="p-2 text-center">Application Fees</th>
+                <th className="p-2 text-center">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {scholarships.map(s => (
+                <tr key={s._id} className="text-center">
+                  <td className="p-2 text-center">{s.scholarshipName || s.name}</td>
+                  <td className="p-2 text-center">{s.universityName}</td>
+                  <td className="p-2 text-center">{s.subjectCategory}</td>
+                  <td className="p-2 text-center">{s.degree}</td>
+                  <td className="p-2 text-center">{s.applicationFees}</td>
+                  <td className="p-2 text-center">
+                    <div className="flex justify-center gap-2">
+                      <button className="btn btn-xs bg-blue-100 text-blue-700" onClick={() => setDetailsScholarship(s)}>Details</button>
+                      <button className="btn btn-xs bg-green-100 text-green-700" onClick={() => openEditModal(s)}>Edit</button>
+                      <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleDelete(s._id)}>Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
       
       {detailsScholarship && (

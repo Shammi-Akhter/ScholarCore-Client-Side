@@ -13,9 +13,9 @@ export default function UserDashboard() {
   const [tab, setTab] = useState('profile');
 
   return (
-    <div className="flex min-h-screen">
-      
-      <aside className="w-64 bg-gray-100 p-4 border-r">
+    <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">
+      {/* Sidebar */}
+      <aside className="w-full md:w-64 bg-gray-100 p-6 border-r md:border-b-0 border-b md:rounded-none rounded-b-xl">
         <h2 className="text-xl font-bold mb-6">User Dashboard</h2>
         <nav className="flex flex-col gap-3">
           {TABS.map(t => (
@@ -29,8 +29,8 @@ export default function UserDashboard() {
           ))}
         </nav>
       </aside>
-    
-      <main className="flex-1 p-2">
+      {/* Main Content */}
+      <main className="flex-1 p-4 md:p-8">
         {tab === 'profile' && <MyProfile />}
         {tab === 'applications' && <MyApplications />}
         {tab === 'reviews' && <MyReviews />}
