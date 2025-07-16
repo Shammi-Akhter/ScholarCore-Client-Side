@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmModal from './ConfirmModal';
 
 const FIELDS = [
   { key: 'scholarshipName', label: 'Scholarship Name' },
   { key: 'universityName', label: 'University Name' },
+  { key: 'universityCountry', label: 'University Country' },
+  { key: 'universityCity', label: 'University City' },
+  { key: 'universityWorldRank', label: 'University World Rank' },
   {key:'universityLogo', label:'University Logo' },
   { key: 'location', label: 'University Location' },
   { key: 'subjectCategory', label: 'Subject Category' },
@@ -13,7 +17,7 @@ const FIELDS = [
   { key: 'serviceCharge', label: 'Service Charge' },
   { key: 'applicationDeadline', label: 'Application Deadline' },
   { key: 'postDate', label: 'Post Date' },
-
+  { key: 'postedUserEmail', label: 'Posted User Email' },
 ];
 
 export default function ManageScholarships() {
@@ -23,6 +27,8 @@ export default function ManageScholarships() {
   const [detailsScholarship, setDetailsScholarship] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [editLoading, setEditLoading] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
 
   useEffect(() => {
     fetchScholarships();
@@ -41,15 +47,22 @@ export default function ManageScholarships() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this scholarship?')) return;
-    const res = await fetch(`https://scholarcore.vercel.app/scholarships/${id}`, { method: 'DELETE' });
+  const handleDelete = (id) => {
+    setPendingDeleteId(id);
+    setConfirmOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!pendingDeleteId) return;
+    const res = await fetch(`https://scholarcore.vercel.app/scholarships/${pendingDeleteId}`, { method: 'DELETE' });
     if (res.ok) {
+      setScholarships(scholarships.filter(s => s._id !== pendingDeleteId));
       toast.success('Scholarship deleted');
-      setScholarships(scholarships.filter(s => s._id !== id));
     } else {
       toast.error('Delete failed');
     }
+    setConfirmOpen(false);
+    setPendingDeleteId(null);
   };
 
   const openEditModal = (sch) => {
@@ -68,6 +81,9 @@ export default function ManageScholarships() {
     const payload = {
       scholarshipName: editForm.scholarshipName || '',
       universityName: editForm.universityName || '',
+      universityCountry: editForm.universityCountry || '',
+      universityCity: editForm.universityCity || '',
+      universityWorldRank: editForm.universityWorldRank || '',
       universityLogo: editForm.universityLogo || '',
       location: editForm.location || '',
       subjectCategory: editForm.subjectCategory || '',
@@ -77,8 +93,9 @@ export default function ManageScholarships() {
       serviceCharge: editForm.serviceCharge || '',
       applicationDeadline: editForm.applicationDeadline || '',
       postDate: editForm.postDate || '',
+      postedUserEmail: editForm.postedUserEmail || '',
     };
-    // Optionally, check for required fields
+ 
     if (!payload.scholarshipName || !payload.universityName) {
       toast.error('Scholarship Name and University Name are required.');
       return;
@@ -139,7 +156,7 @@ export default function ManageScholarships() {
           </tbody>
         </table>
       )}
-      {/* Details Modal */}
+      
       {detailsScholarship && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg relative">
@@ -176,18 +193,111 @@ export default function ManageScholarships() {
                 )}
                 {/* Scholarship Info Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {FIELDS.filter(f => f.key !== 'logo').map(f => (
-                    <div key={f.key} className="flex flex-col">
-                      <label className="font-medium text-gray-700 mb-1">{f.label}</label>
-                      <input
-                        name={f.key}
-                        value={editForm[f.key] || ''}
-                        onChange={handleEditChange}
-                        className="input input-bordered w-full rounded-lg"
-                        disabled={f.key === 'postedUserEmail'}
-                      />
-                    </div>
-                  ))}
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">Scholarship Name</label>
+                    <input name="scholarshipName" value={editForm.scholarshipName || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">University Name</label>
+                    <input name="universityName" value={editForm.universityName || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">University Country</label>
+                    <input name="universityCountry" value={editForm.universityCountry || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                 
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">University City</label>
+                    <input name="universityCity" value={editForm.universityCity || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">University World Rank</label>
+                    <input name="universityWorldRank" type="number" min="1" value={editForm.universityWorldRank || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">University Logo</label>
+                    <input name="universityLogo" value={editForm.universityLogo || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">University Location</label>
+                    <input name="location" value={editForm.location || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                 
+                  <div className="flex flex-col relative">
+                    <label className="font-medium text-gray-700 mb-1">Subject Category</label>
+                    <select name="subjectCategory" value={editForm.subjectCategory || ''} onChange={handleEditChange} className="input input-bordered w-full appearance-none pr-10 rounded-lg">
+                      <option value="">Select Subject</option>
+                      <option>Agriculture</option>
+                      <option>Engineering</option>
+                      <option>Doctor</option>
+                    </select>
+                    <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </div>
+                  
+                  <div className="flex flex-col relative">
+                    <label className="font-medium text-gray-700 mb-1">Scholarship Category</label>
+                    <select name="scholarshipCategory" value={editForm.scholarshipCategory || ''} onChange={handleEditChange} className="input input-bordered w-full appearance-none pr-10 rounded-lg">
+                      <option value="">Select Category</option>
+                      <option>Full fund</option>
+                      <option>Partial</option>
+                      <option>Self-fund</option>
+                    </select>
+                    <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </div>
+                 
+                  <div className="flex flex-col relative">
+                    <label className="font-medium text-gray-700 mb-1">Degree</label>
+                    <select name="degree" value={editForm.degree || ''} onChange={handleEditChange} className="input input-bordered w-full appearance-none pr-10 rounded-lg">
+                      <option value="">Select Degree</option>
+                      <option>Diploma</option>
+                      <option>Bachelor</option>
+                      <option>Masters</option>
+                    </select>
+                    <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">Application Fees</label>
+                    <input name="applicationFees" value={editForm.applicationFees || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">Service Charge</label>
+                    <input name="serviceCharge" value={editForm.serviceCharge || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">Application Deadline</label>
+                    <input name="applicationDeadline" type="date" value={editForm.applicationDeadline || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">Post Date</label>
+                    <input name="postDate" type="date" value={editForm.postDate || ''} onChange={handleEditChange} className="input input-bordered w-full rounded-lg" />
+                  </div>
+                  
+                  <div className="flex flex-col">
+                    <label className="font-medium text-gray-700 mb-1">Posted User Email</label>
+                    <input name="postedUserEmail" value={editForm.postedUserEmail || ''} readOnly className="input input-bordered w-full rounded-lg bg-gray-100" />
+                  </div>
                 </div>
                 <div className="flex justify-center pt-2">
                   <button type="submit" className="btn bg-amber-400 hover:bg-amber-500 text-white font-bold px-8 py-2 rounded-full shadow transition-all duration-200 w-full max-w-xs" disabled={editLoading}>
@@ -199,6 +309,12 @@ export default function ManageScholarships() {
           </div>
         </div>
       )}
+      <ConfirmModal
+        open={confirmOpen}
+        onConfirm={confirmDelete}
+        onCancel={() => { setConfirmOpen(false); setPendingDeleteId(null); }}
+        message="Are you sure you want to delete this scholarship?"
+      />
     </div>
   );
 } 

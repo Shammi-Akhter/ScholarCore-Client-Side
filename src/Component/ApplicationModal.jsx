@@ -31,6 +31,9 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
       universityName: scholarship.universityName,
       scholarshipCategory: scholarship.scholarshipCategory,
       subjectCategory: scholarship.subjectCategory,
+      location: scholarship.location || '',
+      applicationFees: scholarship.applicationFees || '',
+      serviceCharge: scholarship.serviceCharge || '',
       appliedAt: new Date().toISOString(),
     };
     try {

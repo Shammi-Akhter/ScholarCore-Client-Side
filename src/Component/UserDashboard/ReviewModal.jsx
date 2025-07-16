@@ -14,6 +14,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
   const [scholarshipInfo, setScholarshipInfo] = useState({
     scholarshipName: application?.scholarshipName || review?.scholarshipName || '',
     universityName: application?.universityName || review?.universityName || '',
+    subjectCategory: application?.subjectCategory || review?.subjectCategory || '',
   });
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState('');
@@ -30,6 +31,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
             setScholarshipInfo({
               scholarshipName: data.scholarshipName || data.name || application.scholarshipName || application.scholarshipCategory || application.subjectCategory || '',
               universityName: data.universityName || data.university || application.universityName || '',
+              subjectCategory: application.subjectCategory || data.subjectCategory || '',
             });
             if (!(data.scholarshipName || data.name || application.scholarshipName || application.scholarshipCategory || application.subjectCategory)) {
               setFetchError('Scholarship name not found.');
@@ -38,6 +40,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
             setScholarshipInfo({
               scholarshipName: application.scholarshipName || application.scholarshipCategory || application.subjectCategory || '',
               universityName: application.universityName || '',
+              subjectCategory: application.subjectCategory || '',
             });
             if (!(application.scholarshipName || application.scholarshipCategory || application.subjectCategory)) {
               setFetchError('Scholarship name not found.');
@@ -47,6 +50,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
           setScholarshipInfo({
             scholarshipName: application.scholarshipName || application.scholarshipCategory || application.subjectCategory || '',
             universityName: application.universityName || '',
+            subjectCategory: application.subjectCategory || '',
           });
           if (!(application.scholarshipName || application.scholarshipCategory || application.subjectCategory)) {
             setFetchError('Scholarship name not found.');
@@ -82,6 +86,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
       reviewDate: form.reviewDate,
       scholarshipName: scholarshipInfo.scholarshipName,
       universityName: scholarshipInfo.universityName,
+      subjectCategory: scholarshipInfo.subjectCategory || application?.subjectCategory || '-',
       scholarshipId: application?.scholarshipId || application?._id || review?.scholarshipId || '',
       userName: user?.displayName || '',
       userImage: user?.photoURL || '',
@@ -139,6 +144,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
         <div className="mb-4 space-y-1 text-sm text-gray-700">
           <div><strong>Scholarship:</strong> {loading ? 'Loading...' : (scholarshipInfo.scholarshipName || '-')}</div>
           <div><strong>University:</strong> {loading ? 'Loading...' : (scholarshipInfo.universityName || '-')}</div>
+          <div><strong>Subject Category:</strong> {loading ? 'Loading...' : (scholarshipInfo.subjectCategory || '-')}</div>
           <div><strong>Your Name:</strong> {user?.displayName || '-'}</div>
           <div><strong>Your Email:</strong> {user?.email || '-'}</div>
           {fetchError && <div className="text-red-500 font-semibold">{fetchError}</div>}
@@ -146,7 +152,30 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label className="block mb-1 font-medium">Rating</label>
-            <input type="number" name="rating" min="1" max="5" value={form.rating} onChange={handleChange} required className="input input-bordered w-full" />
+            <input
+              type="number"
+              name="rating"
+              min="1"
+              max="5"
+              step="0.1"
+              value={form.rating}
+              onChange={e => {
+                let value = e.target.value;
+                // Only allow one decimal place
+                if (value.includes('.')) {
+                  const [intPart, decPart] = value.split('.');
+                  value = intPart + '.' + decPart.slice(0, 1);
+                }
+                // Clamp value between 1 and 5
+                let num = parseFloat(value);
+                if (isNaN(num)) num = '';
+                else if (num < 1) num = 1;
+                else if (num > 5) num = 5;
+                setForm({ ...form, rating: num });
+              }}
+              required
+              className="input input-bordered w-full"
+            />
           </div>
           <div>
             <label className="block mb-1 font-medium">Comment</label>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmModal from '../ModeratorDashboard/ConfirmModal';
 
 const ROLES = ['user', 'moderator', 'admin'];
 
@@ -7,6 +8,8 @@ export default function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [roleFilter, setRoleFilter] = useState('all');
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingDeleteUser, setPendingDeleteUser] = useState(null);
 
   useEffect(() => {
     fetchUsers();
@@ -44,19 +47,22 @@ export default function ManageUsers() {
     }
   };
 
-  const handleDelete = async (user) => {
-    if (!window.confirm('Are you sure you want to delete this user?')) return;
-    try {
-      const res = await fetch(`https://scholarcore.vercel.app/users/${user._id}`, { method: 'DELETE' });
-      if (res.ok) {
-        toast.success('User deleted!');
-        setUsers(users.filter(u => u._id !== user._id));
-      } else {
-        toast.error('Failed to delete user');
-      }
-    } catch {
+  const handleDelete = (user) => {
+    setPendingDeleteUser(user);
+    setConfirmOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!pendingDeleteUser) return;
+    const res = await fetch(`https://scholarcore.vercel.app/users/${pendingDeleteUser._id}`, { method: 'DELETE' });
+    if (res.ok) {
+      setUsers(users.filter(u => u._id !== pendingDeleteUser._id));
+      toast.success('User deleted!');
+    } else {
       toast.error('Failed to delete user');
     }
+    setConfirmOpen(false);
+    setPendingDeleteUser(null);
   };
 
   const filteredUsers = roleFilter === 'all' ? users : users.filter(u => u.role === roleFilter);
@@ -116,6 +122,12 @@ export default function ManageUsers() {
           </tbody>
         </table>
       )}
+      <ConfirmModal
+        open={confirmOpen}
+        onConfirm={confirmDelete}
+        onCancel={() => { setConfirmOpen(false); setPendingDeleteUser(null); }}
+        message="Are you sure you want to delete this user?"
+      />
     </div>
   );
 } 

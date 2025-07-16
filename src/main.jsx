@@ -21,6 +21,7 @@ import Checkout from './Component/Checkout.jsx';
 import UserDashboard from './Component/UserDashboard/UserDashboard.jsx'
 import ModeratorDashboard from './Component/ModeratorDashboard/ModeratorDashboard.jsx'
 import AdminDashboard from './Component/AdminDashboard/AdminDashboard.jsx'
+import PrivateRoute from './Component/Routes/PrivateRoute.jsx'
 
 
 const router = createBrowserRouter([
@@ -55,7 +56,9 @@ const router = createBrowserRouter([
       },
       {
         path:"/scholarship-details/:id",
-        element:<ScholarshipDetails/>
+        element:(<PrivateRoute>
+          <ScholarshipDetails/>
+        </PrivateRoute>)
       },
       {
         path: '/checkout/:id',
@@ -68,11 +71,15 @@ const router = createBrowserRouter([
       ,
       {
         path: '/moderator-dashboard',
-        element: <ModeratorDashboard />
+        element: (
+          <ModeratorDashboard />
+        )
       },
       {
         path: '/admin-dashboard',
-        element: <AdminDashboard />
+        element: (
+          <AdminDashboard />
+       )
       }
     ],
     errorElement: <ErrorPage />

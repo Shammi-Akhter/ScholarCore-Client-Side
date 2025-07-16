@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmModal from './ConfirmModal';
 
 export default function AllApplications() {
   const [applications, setApplications] = useState([]);
@@ -8,6 +9,8 @@ export default function AllApplications() {
   const [feedbackApp, setFeedbackApp] = useState(null);
   const [feedbackText, setFeedbackText] = useState('');
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingCancelApp, setPendingCancelApp] = useState(null);
 
   useEffect(() => {
     fetchApplications();
@@ -50,23 +53,28 @@ export default function AllApplications() {
     }
   };
 
-  const handleCancel = async (app) => {
-    if (!window.confirm('Are you sure you want to cancel this application?')) return;
-    try {
-      const res = await fetch(`https://scholarcore.vercel.app/applied-scholarships/${app._id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'rejected' }),
-      });
-      if (res.ok) {
-        toast.success('Application cancelled!');
-        fetchApplications();
-      } else {
-        toast.error('Failed to cancel application');
-      }
-    } catch {
+  const handleCancel = (app) => {
+    setPendingCancelApp(app);
+    setConfirmOpen(true);
+  };
+
+  const confirmCancel = async () => {
+    if (!pendingCancelApp) return;
+    const res = await fetch(`https://scholarcore.vercel.app/applied-scholarships/${pendingCancelApp._id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'rejected' }),
+    });
+    if (res.ok) {
+      setApplications(applications.map(a =>
+        a._id === pendingCancelApp._id ? { ...a, status: 'rejected' } : a
+      ));
+      toast.success('Application cancelled!');
+    } else {
       toast.error('Failed to cancel application');
     }
+    setConfirmOpen(false);
+    setPendingCancelApp(null);
   };
 
   return (
@@ -209,6 +217,12 @@ export default function AllApplications() {
           </div>
         </div>
       )}
+      <ConfirmModal
+        open={confirmOpen}
+        onConfirm={confirmCancel}
+        onCancel={() => { setConfirmOpen(false); setPendingCancelApp(null); }}
+        message="Are you sure you want to cancel this application?"
+      />
     </div>
   );
 } 
