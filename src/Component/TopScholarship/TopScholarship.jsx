@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router'; // for navigation (if needed)
+import { NavLink, useNavigate } from 'react-router'; 
 
 const TopScholarship = () => {
     const [scholarships, setScholarships] = useState([]);
@@ -73,7 +73,7 @@ const TopScholarship = () => {
 
                             <NavLink to={`/scholarship-details/${scholarship._id}`}>
                                 <button
-                                    className="mt-3 w-2/3 bg-amber-200  text-gray-900 font-medium py-2 rounded-full hover:bg-amber-300 transition"
+                                    className="mt-3 w-2/3 bg-amber-200  cursor-pointer text-gray-900 font-medium py-2 rounded-full hover:bg-amber-300 transition"
 
                                 >
                                     Scholarship Details
@@ -84,11 +84,11 @@ const TopScholarship = () => {
                 ))}
             </div>
 
-            {/* All Scholarships Button */}
+        
             <div className="mt-10 flex justify-center">
                 <button
-                    className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition font-semibold"
-                    onClick={() => navigate('/all-scholarship')} // change route as needed
+                    className="bg-gray-800 text-white px-6 py-3 cursor-pointer rounded-lg hover:bg-gray-700 transition font-semibold"
+                    onClick={() => navigate('/all-scholarship')} 
                 >
                     View All Scholarships
                 </button>

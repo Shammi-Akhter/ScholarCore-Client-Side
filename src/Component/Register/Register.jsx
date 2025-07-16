@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
-import { useNavigate } from 'react-router';         // ✅ use react‑router‑dom
+import { useNavigate } from 'react-router';       
 import toast, { Toaster } from 'react-hot-toast';
 import { auth } from '../../firebase.init';
 
@@ -21,9 +21,6 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  /* ─────────────────────────
-     tiny helper: grab JWT
-     ───────────────────────── */
   const getJWT = async (email, uid) => {
     try {
       const res = await fetch('https://scholarcore.vercel.app/jwt', {
@@ -43,9 +40,7 @@ const Register = () => {
     }
   };
 
-  /* ─────────────────────────
-     NEW helper: save user doc
-     ───────────────────────── */
+
   const saveUserInDB = async ({ email, displayName, photoURL, uid }) => {
     try {
       const res = await fetch('https://scholarcore.vercel.app/users', {
@@ -79,14 +74,11 @@ const Register = () => {
   };
   
 
-  /* ─────────────────────────
-     Register click handler
-     ───────────────────────── */
      const handleRegister = async (e) => {
       e.preventDefault();
       const { name, email, password, photoURL } = formData;
     
-      // ✅ Password validations
+     
       const errors = [];
       if (password.length < 6) errors.push("Password must be at least 6 characters.");
       if (!/[A-Z]/.test(password)) errors.push("Password must include a capital letter.");
@@ -94,7 +86,7 @@ const Register = () => {
     
       if (errors.length > 0) {
         errors.forEach((err) => toast.error(err));
-        return; // 🔁 prevent submission
+        return; 
       }
     
       try {
@@ -118,9 +110,6 @@ const Register = () => {
     };
     
 
-  /* ─────────────────────────
-     UI
-     ───────────────────────── */
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <Toaster position="top-center" reverseOrder={false} />
@@ -133,7 +122,7 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleRegister} className="space-y-5">
-          {/* Full Name */}
+        
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Full Name
@@ -149,7 +138,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Email */}
+      
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Email
@@ -165,7 +154,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Image URL */}
+      
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Image URL
@@ -180,8 +169,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Password */}
-          {/* Password */}
+        
 <div>
   <label className="block text-gray-700 font-medium mb-1">
     Password
@@ -210,7 +198,7 @@ const Register = () => {
 </div>
 
 
-          {/* Submit */}
+        
           <button
             type="submit"
             className="w-full bg-amber-200 text-gray-900 font-semibold py-2 rounded-lg hover:bg-amber-300 transition"

@@ -1,5 +1,5 @@
 import React from 'react';
-// import responsiveImage from '../assets/responsive-devices.png'; // make sure to place your image correctly
+
 
 const IdeaSection = () => {
     return (

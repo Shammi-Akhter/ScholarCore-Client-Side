@@ -16,10 +16,10 @@ const AboutUs = () => {
 
        
         <div className="grid md:grid-cols-2 gap-10 items-center">
-          {/* Image / Illustration */}
+      
           <div>
             <img
-              src="https://i.postimg.cc/t7004vNx/b3.jpg" // Replace with your actual image path
+              src="https://i.postimg.cc/t7004vNx/b3.jpg" 
               alt="Scholar Management Illustration"
               className="w-full h-auto"
             />

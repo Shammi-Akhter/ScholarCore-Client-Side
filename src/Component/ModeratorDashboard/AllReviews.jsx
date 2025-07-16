@@ -15,7 +15,7 @@ export default function AllReviews() {
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://scholarcore.vercel.app/reviews'); // changed from /all-reviews
+      const res = await fetch('https://scholarcore.vercel.app/reviews'); 
       const data = await res.json();
       setReviews(data);
     } catch {

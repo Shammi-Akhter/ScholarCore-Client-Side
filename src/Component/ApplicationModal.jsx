@@ -19,7 +19,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Prepare application data
+ 
     const application = {
       ...form,
       userName: user?.displayName || '',
@@ -27,7 +27,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
       userId: user?.uid || '',
       userPhoto: user?.photoURL || '',
       scholarshipId: scholarshipId,
-      scholarshipName: scholarship.scholarshipName || scholarship.name || '', // <-- add this
+      scholarshipName: scholarship.scholarshipName || scholarship.name || '', 
       universityName: scholarship.universityName,
       scholarshipCategory: scholarship.scholarshipCategory,
       subjectCategory: scholarship.subjectCategory,
@@ -68,7 +68,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* User Info */}
+         
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
               <label className="font-medium text-gray-700 text-right pr-2">User Name</label>
               <input type="text" value={user?.displayName || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
@@ -85,7 +85,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
               <label className="font-medium text-gray-700 text-right pr-2">Scholarship ID</label>
               <input type="text" value={scholarshipId} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
             </div>
-            {/* Application Fields */}
+          
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
               <label className="font-medium text-gray-700 text-right pr-2">Phone Number</label>
               <input type="text" name="phone" placeholder="Phone Number" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange} />

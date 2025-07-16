@@ -77,7 +77,7 @@ export default function ManageScholarships() {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    // Build payload with all required fields, matching your schema
+    
     const payload = {
       scholarshipName: editForm.scholarshipName || '',
       universityName: editForm.universityName || '',
@@ -181,7 +181,7 @@ export default function ManageScholarships() {
           </div>
         </div>
       )}
-      {/* Edit Modal */}
+    
       {editScholarship && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative p-0">
@@ -189,13 +189,13 @@ export default function ManageScholarships() {
             <div className="px-8 pt-8 pb-4 max-h-[90vh] overflow-y-auto rounded-2xl">
               <h2 className="text-3xl font-bold mb-6 text-center">Edit Scholarship</h2>
               <form onSubmit={handleEditSubmit} className="space-y-4">
-                {/* Logo */}
+               
                 {editForm.logo && (
                   <div className="flex justify-center mb-4">
                     <img src={editForm.logo} alt="Logo" className="w-20 h-20 rounded-full border-4 border-amber-200 shadow" />
                   </div>
                 )}
-                {/* Scholarship Info Fields */}
+               
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   
                   <div className="flex flex-col">

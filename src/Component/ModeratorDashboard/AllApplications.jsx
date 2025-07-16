@@ -82,7 +82,6 @@ export default function AllApplications() {
     setPendingCancelApp(null);
   };
 
-  // Filtering and sorting logic
   let filtered = applications.filter(app => {
     return (
       (!filterStatus || app.status === filterStatus) &&
@@ -108,7 +107,7 @@ export default function AllApplications() {
   return (
     <div className="px-2 sm:px-4 md:px-8">
       <h2 className="text-xl font-bold mb-4">All Applied Scholarships</h2>
-      {/* Filter and Sort Controls */}
+     
       <div className="flex flex-wrap gap-4 mb-4 items-center">
         <div>
           <label className="mr-2 font-medium">Status:</label>
@@ -182,7 +181,7 @@ export default function AllApplications() {
           </table>
         </div>
       )}
-      {/* Details Modal */}
+     
       {detailsApp && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative p-0">
@@ -260,7 +259,7 @@ export default function AllApplications() {
           </div>
         </div>
       )}
-      {/* Feedback Modal */}
+     
       {feedbackApp && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative">

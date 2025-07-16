@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <section className="bg-white dark:bg-gray-900 py-16">
       <div className="container mx-auto px-4 max-w-4xl">
-        {/* Header */}
+       
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white">
             Contact <span className="text-primary-600">Us</span>
@@ -14,10 +14,10 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Contact Form */}
+        
         <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8">
           <form className="grid gap-6">
-            {/* Name */}
+            
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                 Your Name
@@ -29,7 +29,7 @@ const Contact = () => {
               />
             </div>
 
-            {/* Email */}
+           
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                 Email Address
@@ -41,7 +41,7 @@ const Contact = () => {
               />
             </div>
 
-            {/* Message */}
+           
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                 Your Message
@@ -53,11 +53,11 @@ const Contact = () => {
               ></textarea>
             </div>
 
-            {/* Submit Button */}
+          
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                className="bg-amber-300 hover:bg-amber-400 text-black cursor-pointer py-2 px-6 rounded-lg transition duration-300"
               >
                 Send Message
               </button>
@@ -65,7 +65,7 @@ const Contact = () => {
           </form>
         </div>
 
-        {/* Optional: Contact Info / Support */}
+        
         <div className="text-center mt-12 text-gray-900 dark:text-gray-400">
           <p>Email us at: <a href="mailto:support@scholarcore.com" className="text-primary-600 hover:underline">support@scholarcore.com</a></p>
           <p>Phone: <span className="text-gray-900 dark:text-gray-200">+880 1234-567890</span></p>

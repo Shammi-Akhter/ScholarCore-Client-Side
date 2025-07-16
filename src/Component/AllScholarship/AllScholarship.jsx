@@ -24,7 +24,7 @@ const AllScholarship = () => {
             });
     }, []);
 
-    // Search handler
+  
     const handleSearch = (e) => {
         e.preventDefault();
         if (!search.trim()) {
@@ -42,7 +42,7 @@ const AllScholarship = () => {
         setCurrentPage(1);
     };
 
-    // Pagination logic
+   
     const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
     const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
     const currentScholarships = filtered.slice(startIdx, startIdx + ITEMS_PER_PAGE);
@@ -53,7 +53,7 @@ const AllScholarship = () => {
         <div className="px-2 sm:px-4 md:px-8">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">All Scholarships</h2>
 
-            {/* Search Box */}
+           
             <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
                 <input
                     type="text"
@@ -70,7 +70,7 @@ const AllScholarship = () => {
                 </button>
             </form>
 
-            {/* Scholarships Grid */}
+           
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentScholarships.length === 0 ? (
                     <p className="col-span-3 text-center text-gray-500">No scholarships found.</p>
@@ -80,7 +80,7 @@ const AllScholarship = () => {
                             key={scholar._id ? scholar._id.toString() : index}
                             className="bg-white border border-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
                         >
-                            {/* University Logo */}
+                           
                             {scholar.universityLogo && (
                                 <img
                                     src={scholar.universityLogo}
@@ -89,7 +89,7 @@ const AllScholarship = () => {
                                 />
                             )}
 
-                            {/* Content */}
+                          
                             <div className="p-5 space-y-2">
                                 <h3 className="text-xl font-semibold  text-gray-800">{scholar.universityName || 'University Name'}</h3>
                                 <p className="text-sm text-gray-700">
@@ -127,7 +127,7 @@ const AllScholarship = () => {
                 )}
             </div>
 
-            {/* Pagination Controls */}
+           
             {totalPages > 1 && (
                 <div className="flex justify-center mt-10 gap-2">
                     <button

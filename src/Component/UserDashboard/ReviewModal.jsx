@@ -10,7 +10,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
     reviewDate: review?.reviewDate || new Date().toISOString().slice(0, 10),
   });
 
-  // State for scholarship details
+ 
   const [scholarshipInfo, setScholarshipInfo] = useState({
     scholarshipName: application?.scholarshipName || review?.scholarshipName || '',
     universityName: application?.universityName || review?.universityName || '',
@@ -79,7 +79,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
       toast.error(fetchError);
       return;
     }
-    // Ensure all required fields are present
+    
     const reviewData = {
       rating: form.rating,
       comment: form.comment,
@@ -92,13 +92,13 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
       userImage: user?.photoURL || '',
       userEmail: user?.email || '',
     };
-    // Defensive check: log and validate scholarshipId
-    console.log('Submitting review for scholarshipId:', reviewData.scholarshipId);
+   
+    
     if (!reviewData.scholarshipId || typeof reviewData.scholarshipId !== 'string' || reviewData.scholarshipId.length < 10) {
       toast.error('Invalid or missing scholarship ID. Cannot submit review.');
       return;
     }
-    // Validation: check all required fields
+   
     if (!reviewData.scholarshipName || !reviewData.universityName || !reviewData.scholarshipId || !reviewData.userName || !reviewData.userEmail || !reviewData.rating || !reviewData.comment || !reviewData.reviewDate) {
       toast.error('All fields are required.');
       return;
@@ -122,7 +122,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
 
   if (!open) return null;
 
-  // Only block if adding a new review and scholarshipId is missing
+  
   if (!isEdit && !application?.scholarshipId) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
@@ -140,7 +140,7 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
       <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative">
         <button className="absolute top-2 right-2 text-xl" onClick={onClose}>&times;</button>
         <h2 className="text-2xl font-bold mb-4">{isEdit ? 'Edit Review' : 'Add Review'}</h2>
-        {/* Context Info */}
+     
         <div className="mb-4 space-y-1 text-sm text-gray-700">
           <div><strong>Scholarship:</strong> {loading ? 'Loading...' : (scholarshipInfo.scholarshipName || '-')}</div>
           <div><strong>University:</strong> {loading ? 'Loading...' : (scholarshipInfo.universityName || '-')}</div>
@@ -161,12 +161,12 @@ export default function ReviewModal({ open, onClose, application, review, isEdit
               value={form.rating}
               onChange={e => {
                 let value = e.target.value;
-                // Only allow one decimal place
+                
                 if (value.includes('.')) {
                   const [intPart, decPart] = value.split('.');
                   value = intPart + '.' + decPart.slice(0, 1);
                 }
-                // Clamp value between 1 and 5
+                
                 let num = parseFloat(value);
                 if (isNaN(num)) num = '';
                 else if (num < 1) num = 1;

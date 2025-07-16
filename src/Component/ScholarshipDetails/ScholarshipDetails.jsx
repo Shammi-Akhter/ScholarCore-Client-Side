@@ -39,7 +39,7 @@ const ScholarshipDetails = () => {
     arrows: filteredReviews.length > 1,
     responsive: [
       {
-        breakpoint: 768, // for mobile
+        breakpoint: 768, 
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -51,7 +51,7 @@ const ScholarshipDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      {/* Scholarship Info Card */}
+   
       <div className="bg-white shadow-lg rounded-xl overflow-hidden mb-8">
         {scholarship.universityLogo && (
           <img
@@ -84,7 +84,7 @@ const ScholarshipDetails = () => {
         </div>
       </div>
 
-      {/* Review Section */}
+      
       <div>
         <h3 className="text-2xl font-semibold text-gray-800 mb-4">User Reviews</h3>
 

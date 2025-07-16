@@ -41,7 +41,7 @@ export default function EditApplicationModal({ open, onClose, application }) {
         <div className="px-8 pt-8 pb-4 max-h-[90vh] overflow-y-auto rounded-2xl">
           <h2 className="text-3xl font-bold mb-6 text-center">Edit Application</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* User Info */}
+            
             {application.userPhoto && (
               <div className="flex justify-center mb-4">
                 <img src={application.userPhoto} alt="User" className="w-20 h-20 rounded-full border-4 border-amber-200 shadow" />
@@ -59,7 +59,7 @@ export default function EditApplicationModal({ open, onClose, application }) {
               <label className="font-medium text-gray-700 text-right pr-2">Scholarship ID</label>
               <input type="text" value={application.scholarshipId || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
             </div>
-            {/* Editable Fields */}
+          
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
               <label className="font-medium text-gray-700 text-right pr-2">Phone Number</label>
               <input type="text" name="phone" value={form.phone} required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange} />
@@ -104,7 +104,7 @@ export default function EditApplicationModal({ open, onClose, application }) {
                 <option>3+ years</option>
               </select>
             </div>
-            {/* Read-only Scholarship Info */}
+            
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
               <label className="font-medium text-gray-700 text-right pr-2">University Name</label>
               <input type="text" value={application.universityName || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
