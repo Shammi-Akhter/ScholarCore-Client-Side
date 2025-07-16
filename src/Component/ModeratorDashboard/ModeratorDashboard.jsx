@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import MyProfile from './MyProfile';
 import ManageScholarships from './ManageScholarships';
@@ -17,6 +17,10 @@ const tabs = [
 export default function ModeratorDashboard() {
   const { role } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('profile');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [activeTab]);
 
   if (role !== 'moderator') {
     return <div className="text-center text-red-500 font-bold mt-10">Access Denied: Moderator Only</div>;

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MyProfile from './MyProfile';
 import MyApplications from './MyApplications';
 import MyReviews from './MyReviews';
+import { AuthContext } from '../../context/AuthContext';
 
 const TABS = [
   { key: 'profile', label: 'My Profile' },
@@ -11,6 +12,11 @@ const TABS = [
 
 export default function UserDashboard() {
   const [tab, setTab] = useState('profile');
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [tab]);
 
   return (
     <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">

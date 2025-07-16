@@ -162,7 +162,7 @@ export default function ManageScholarships() {
       )}
       
       {detailsScholarship && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg relative">
             <button className="absolute top-2 right-2 text-xl" onClick={() => setDetailsScholarship(null)}>&times;</button>
             <h2 className="text-2xl font-bold mb-4">Scholarship Details</h2>
@@ -183,7 +183,7 @@ export default function ManageScholarships() {
       )}
     
       {editScholarship && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative p-0">
             <button className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700 transition" onClick={() => setEditScholarship(null)}>&times;</button>
             <div className="px-8 pt-8 pb-4 max-h-[90vh] overflow-y-auto rounded-2xl">

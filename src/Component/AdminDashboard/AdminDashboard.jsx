@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import AdminProfile from './AdminProfile';
 import AddScholarship from './AddScholarship';
@@ -21,6 +21,10 @@ const tabs = [
 export default function AdminDashboard() {
   const { role } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('profile');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [activeTab]);
 
   if (role !== 'admin') {
     return <div className="text-center text-red-500 font-bold mt-10">Access Denied: Admin Only</div>;

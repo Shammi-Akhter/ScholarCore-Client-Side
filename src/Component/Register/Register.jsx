@@ -111,7 +111,7 @@ const Register = () => {
     
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div className="py-5 md:py-20 bg-gray-100 flex items-center justify-center px-4">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-white shadow-lg rounded-2xl w-full max-w-md p-8">
         <div className="text-center mb-6">
