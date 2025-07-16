@@ -100,7 +100,7 @@ const ScholarshipDetails = () => {
               />
               <div>
                 <p className="font-semibold">{filteredReviews[0].userName}</p>
-                <p className="text-sm text-gray-500">{filteredReviews[0].reviewDate}</p>
+                <p className="text-sm text-gray-500">{filteredReviews[0].reviewDate ? new Date(filteredReviews[0].reviewDate).toLocaleDateString() : '-'}</p>
               </div>
             </div>
             <div className="text-yellow-500 mb-2">
@@ -121,7 +121,7 @@ const ScholarshipDetails = () => {
                     />
                     <div>
                       <p className="font-semibold">{review.userName}</p>
-                      <p className="text-sm text-gray-500">{review.reviewDate}</p>
+                      <p className="text-sm text-gray-500">{review.reviewDate ? new Date(review.reviewDate).toLocaleDateString() : '-'}</p>
                     </div>
                   </div>
                   <div className="text-yellow-500 mb-2">

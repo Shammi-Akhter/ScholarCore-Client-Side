@@ -56,7 +56,7 @@ export default function MyReviews() {
                 <td className="p-2 align-middle">{r.scholarshipName}</td>
                 <td className="p-2 align-middle">{r.universityName}</td>
                 <td className="p-2 align-middle">{r.comment}</td>
-                <td className="p-2 align-middle">{r.reviewDate}</td>
+                <td className="p-2 align-middle">{r.reviewDate ? new Date(r.reviewDate).toLocaleDateString() : '-'}</td>
                 <td className="p-2 align-middle flex gap-2 justify-center">
                   <button className="btn btn-xs bg-green-100 text-green-700" onClick={() => setEditReview(r)}>Edit</button>
                   <button className="btn btn-xs bg-red-100 text-red-700" onClick={() => handleDelete(r._id)}>Delete</button>
