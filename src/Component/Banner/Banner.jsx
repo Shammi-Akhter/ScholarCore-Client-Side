@@ -8,23 +8,19 @@ const bannerData = [
   {
     title: "Manage Scholars Effortlessly",
     subtitle: "Streamline student data, progress, and performance.",
-    image: "https://i.postimg.cc/qBWgKkm8/b1.webp"
+    image: "https://i.postimg.cc/sxMtrPS5/11.webp"
   },
   {
     title: "Track Academic Progress",
     subtitle: "Monitor grades, attendance, and reports in one place.",
-    image: "https://i.postimg.cc/Yqcq9d9R/b6.webp"
+    image: "https://i.postimg.cc/zD9Jf3Bq/22.webp"
   },
   {
     title: "Empower Educators & Students",
     subtitle: "Give tools that boost teaching and learning efficiency.",
     image: "https://i.postimg.cc/GtxNb3tZ/b5.jpg"
   },
-  {
-    title: "Empower Educators & Students",
-    subtitle: "Give tools that boost teaching and learning efficiency.",
-    image: "https://i.postimg.cc/66bnmJM3/b7.webp"
-  },
+ 
   {
     title: "Empower Educators & Students",
     subtitle: "Give tools that boost teaching and learning efficiency.",
@@ -47,7 +43,7 @@ const Banner = () => {
     <div className="px-2 sm:px-4 md:px-8">
       <Slider {...settings}>
         {bannerData.map((slide, idx) => (
-          <div key={idx} className="relative w-full h-[70vh] flex items-center justify-center">
+          <div key={idx} className="relative w-full h-[82vh] flex items-center justify-center">
             <img
               src={slide.image}
               alt={slide.title}
