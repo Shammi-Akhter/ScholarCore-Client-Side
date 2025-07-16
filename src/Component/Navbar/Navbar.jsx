@@ -55,7 +55,7 @@ const Navbar = () => {
     if (role === "admin") {
       items.push({ path: "/admin-dashboard", label: "Admin Dashboard" });
     } else if (role === "moderator") {
-      items.push({ path: "/moderator-tools", label: "Moderator Panel" });
+      items.push({ path: "/moderator-dashboard", label: "Moderator Dashboard" });
     } else if (role === "user") {
       items.push({ path: "/user-dashboard", label: "User Dashboard" });
     }
