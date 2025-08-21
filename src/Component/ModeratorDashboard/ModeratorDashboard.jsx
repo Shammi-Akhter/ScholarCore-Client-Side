@@ -15,7 +15,6 @@ const tabs = [
 ];
 
 
-
 export default function ModeratorDashboard() {
   const { role } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('profile');
