@@ -86,6 +86,7 @@ function CheckoutForm({ amount, scholarshipId, scholarship, user }) {
   );
 }
 
+
 export default function Checkout() {
   const { id: scholarshipId } = useParams();
   const location = useLocation();
