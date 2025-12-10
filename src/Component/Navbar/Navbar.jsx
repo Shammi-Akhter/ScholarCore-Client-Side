@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, User, Home, GraduationCap, LayoutDashboard } from "lucide-react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase.init";
+import { Button } from "../../components/ui/button";
 
 
 const commonLinks = [
-  { path: "/", label: "Home" },
-  { path: "/all-scholarship", label: "All Scholarships" },
+  { path: "/", label: "Home", icon: Home },
+  { path: "/all-scholarship", label: "All Scholarships", icon: GraduationCap },
 ];
 
 const Navbar = () => {
@@ -15,7 +16,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null); // 🆕
+  const [role, setRole] = useState(null);
 
   const fetchUserRole = async (email) => {
     try {
@@ -23,16 +24,15 @@ const Navbar = () => {
       const data = await res.json();
       setRole(data.role || "user");
     } catch (err) {
-     
       setRole("user");
     }
   };
 
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      if (currentUser?.email) fetchUserRole(currentUser.email); // 🆕
+      if (currentUser?.email) fetchUserRole(currentUser.email);
     });
     return () => unsubscribe();
   }, []);
@@ -48,34 +48,36 @@ const Navbar = () => {
     navigate("/login");
   };
 
- 
+
   const getNavItems = () => {
     const items = [...commonLinks];
 
     if (role === "admin") {
-      items.push({ path: "/admin-dashboard", label: "Admin Dashboard" });
+      items.push({ path: "/admin-dashboard", label: "Admin Dashboard", icon: LayoutDashboard });
     } else if (role === "moderator") {
-      items.push({ path: "/moderator-dashboard", label: "Moderator Dashboard" });
+      items.push({ path: "/moderator-dashboard", label: "Moderator Dashboard", icon: LayoutDashboard });
     } else if (role === "user") {
-      items.push({ path: "/user-dashboard", label: "User Dashboard" });
+      items.push({ path: "/user-dashboard", label: "User Dashboard", icon: LayoutDashboard });
     }
 
     return items;
   };
 
   const renderLinks = () => (
-    <ul className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-8 text-base font-medium">
-      {getNavItems().map(({ path, label }) => (
+    <ul className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-6 text-base font-medium">
+      {getNavItems().map(({ path, label, icon: Icon }) => (
         <li key={label}>
           <NavLink
             to={path}
             className={({ isActive }) =>
-              `transition-colors duration-200 hover:text-primary-600 ${
-                isActive ? "text-yellow-500" : "text-white dark:text-gray-200"
+              `flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${isActive
+                ? "bg-[#FEE685] text-black font-semibold shadow-sm"
+                : "text-gray-700 hover:bg-gray-100"
               }`
             }
           >
-            {label}
+            <Icon className="w-4 h-4" />
+            <span>{label}</span>
           </NavLink>
         </li>
       ))}
@@ -83,62 +85,66 @@ const Navbar = () => {
   );
 
   return (
-    <header className="sticky bg-gray-800 top-0 z-50 dark:bg-gray-900/80 backdrop-blur shadow-sm">
-      <nav className="container mx-auto flex items-center justify-between py-3 px-4 lg:px-6">
-        <NavLink to="/" className="flex items-center gap-2 text-xl font-semibold">
-          <img
-            src="https://i.postimg.cc/hv5WW3Nx/lo2-removebg-preview.png"
-            alt="ScholarCore logo"
-            className="h-12 w-12 text-white object-contain"
-          />
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e0c87d] via-[#ffffff] to-[#e0c87d]">
+    <header className="sticky bg-white top-0 z-50 shadow-md">
+      <nav className="container mx-auto flex items-center justify-between py-4 px-4 lg:px-8">
+        <NavLink to="/" className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#FEE685] to-[#ffd93d] rounded-xl flex items-center justify-center shadow-lg">
+            <GraduationCap className="w-7 h-7 text-black" />
+          </div>
+          <h1 className="text-2xl font-bold text-black">
             ScholarCore
           </h1>
         </NavLink>
 
         <div className="hidden lg:block">{renderLinks()}</div>
 
-     
-        <div className="hidden sm:flex items-center gap-4">
+
+        <div className="hidden sm:flex items-center gap-3">
           {user ? (
             <>
               {user.displayName && (
-                <span className="text-white font-medium">{user.displayName}</span>
+                <span className="text-gray-700 font-medium hidden md:block">{user.displayName}</span>
               )}
 
               {user.photoURL ? (
                 <img
                   src={user.photoURL}
                   alt="Profile"
-                  className="w-10 h-10 rounded-full object-cover border-2 border-white"
+                  className="w-10 h-10 rounded-full object-cover ring-2 ring-[#FEE685] shadow-sm"
                 />
               ) : (
-                <div className="w-10 h-10 bg-gray-500 rounded-full flex items-center justify-center text-white">
+                <div className="w-10 h-10 bg-gradient-to-br from-[#FEE685] to-[#ffd93d] rounded-full flex items-center justify-center text-black font-semibold shadow-sm">
                   {user.displayName?.charAt(0) || "U"}
                 </div>
               )}
 
-              <button
+              <Button
                 onClick={handleLogout}
-                className="px-2 py-1 rounded-lg border text-white hover:bg-yellow-400 border-white transition"
+                variant="outline"
+                size="sm"
+                className="hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors"
               >
+                <LogOut className="w-4 h-4 mr-2" />
                 Logout
-              </button>
+              </Button>
             </>
           ) : (
             <>
-              <NavLink
-                to="/login"
-                className="px-4 py-2 rounded-lg text-white hover:bg-yellow-400 border border-primary-600 text-primary-600 transition-colors hover:bg-primary-50 dark:hover:bg-primary-700/20"
+              <Button
+                onClick={() => navigate("/login")}
+                variant="outline"
+                size="sm"
+                className="hover:bg-gray-100"
               >
                 Login
-              </NavLink>
-              <NavLink
-                to="/register"
-                className="px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-yellow-400 transition-colors hover:bg-primary-700"
+              </Button>
+              <Button
+                onClick={() => navigate("/register")}
+                size="sm"
+                className="bg-[#FEE685] text-black hover:bg-[#FEE685]/90 shadow-sm"
               >
                 Register
-              </NavLink>
+              </Button>
             </>
           )}
         </div>
@@ -146,7 +152,7 @@ const Navbar = () => {
         <button
           type="button"
           aria-label="Toggle menu"
-          className="inline-flex lg:hidden p-2 rounded-md focus:outline-none bg-white focus:ring-2 focus:ring-primary-600"
+          className="inline-flex lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
           onClick={() => setOpen((prev) => !prev)}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -155,54 +161,55 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-start justify-center lg:hidden">
-          <div className="bg-gray-800 dark:bg-gray-900 w-full max-w-xs sm:max-w-sm p-6 mt-16 rounded-lg shadow-lg relative animate-fadeIn">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start justify-center lg:hidden">
+          <div className="bg-white w-full max-w-sm p-6 mt-20 mx-4 rounded-2xl shadow-2xl relative animate-fadeIn">
             <button
               type="button"
               aria-label="Close menu"
-              className="absolute top-4 right-4 text-white text-2xl"
+              className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100 transition-colors"
               onClick={() => setOpen(false)}
             >
-              <X className="h-7 w-7" />
+              <X className="h-6 w-6" />
             </button>
             {renderLinks()}
-            <div className="flex flex-col gap-3 pt-2">
+            <div className="flex flex-col gap-3 pt-6 mt-6 border-t">
               {user ? (
                 <>
-                  <button
+                  <Button
                     onClick={handleLogout}
-                    className="w-full text-white text-center px-4 py-2 rounded-lg border border-red-500 hover:bg-red-500"
+                    variant="outline"
+                    className="w-full hover:bg-red-50 hover:text-red-600 hover:border-red-200"
                   >
+                    <LogOut className="w-4 h-4 mr-2" />
                     Logout
-                  </button>
+                  </Button>
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
                       alt="Profile"
-                      className="w-10 h-10 rounded-full mx-auto object-cover"
+                      className="w-12 h-12 rounded-full mx-auto object-cover ring-2 ring-[#FEE685] shadow-sm"
                     />
                   ) : (
-                    <div className="text-center text-white font-medium">
+                    <div className="text-center text-gray-700 font-medium">
                       {user.displayName || "User"}
                     </div>
                   )}
                 </>
               ) : (
                 <>
-                  <NavLink
-                    to="/login"
-                    className="w-full text-center px-4 py-2 rounded-lg text-white border border-primary-600 text-primary-600 transition-colors hover:bg-primary-50 dark:hover:bg-primary-700/20"
-                    onClick={() => setOpen(false)}
+                  <Button
+                    onClick={() => navigate("/login")}
+                    variant="outline"
+                    className="w-full"
                   >
                     Login
-                  </NavLink>
-                  <NavLink
-                    to="/register"
-                    className="w-full text-center px-4 py-2 rounded-lg bg-primary-600 text-white transition-colors hover:bg-primary-700"
-                    onClick={() => setOpen(false)}
+                  </Button>
+                  <Button
+                    onClick={() => navigate("/register")}
+                    className="w-full bg-[#FEE685] text-black hover:bg-[#FEE685]/90"
                   >
                     Register
-                  </NavLink>
+                  </Button>
                 </>
               )}
             </div>

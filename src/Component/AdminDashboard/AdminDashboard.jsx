@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { User, Plus, LayoutDashboard, Users, Star, FileText, BarChart3 } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 import AdminProfile from './AdminProfile';
 import AddScholarship from './AddScholarship';
@@ -7,15 +8,16 @@ import ManageApplications from './ManageApplications';
 import ManageUsers from './ManageUsers';
 import ManageReviews from './ManageReviews';
 import Analytics from './Analytics';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 
 const tabs = [
-  { key: 'profile', label: 'Admin Profile' },
-  { key: 'add', label: 'Add Scholarship' },
-  { key: 'scholarships', label: 'Manage Scholarships' },
-  { key: 'users', label: 'Manage Users' },
-  { key: 'reviews', label: 'Manage Review' },
-  { key: 'applications', label: 'Manage Applied Application' },
-  { key: 'analytics', label: 'Analytics' },
+  { key: 'profile', label: 'Admin Profile', icon: User },
+  { key: 'add', label: 'Add Scholarship', icon: Plus },
+  { key: 'scholarships', label: 'Manage Scholarships', icon: LayoutDashboard },
+  { key: 'users', label: 'Manage Users', icon: Users },
+  { key: 'reviews', label: 'Manage Reviews', icon: Star },
+  { key: 'applications', label: 'Manage Applications', icon: FileText },
+  { key: 'analytics', label: 'Analytics', icon: BarChart3 },
 ];
 
 export default function AdminDashboard() {
@@ -31,32 +33,45 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">
-     
-      <aside className="w-full md:w-64 bg-gray-100 p-6 border-r md:border-b-0 border-b md:rounded-none rounded-b-xl">
-        <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
-        <nav className="flex flex-col gap-3">
+    <div className="px-2 sm:px-4 md:px-8 py-8 bg-white min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-black">Admin Dashboard</h1>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 mb-8">
           {tabs.map(tab => (
-            <button
+            <TabsTrigger
               key={tab.key}
-              className={`text-left px-4 py-2 rounded-lg font-medium ${activeTab === tab.key ? 'bg-amber-400 text-white' : 'hover:bg-amber-100'}`}
-              onClick={() => setActiveTab(tab.key)}
+              value={tab.key}
+              className="data-[state=active]:bg-[#FEE685] data-[state=active]:text-black"
             >
-              {tab.label}
-            </button>
+              <tab.icon className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">{tab.label}</span>
+            </TabsTrigger>
           ))}
-        </nav>
-      </aside>
-     
-      <main className="flex-1 p-4 md:p-8">
-        {activeTab === 'profile' && <AdminProfile />}
-        {activeTab === 'add' && <AddScholarship />}
-        {activeTab === 'scholarships' && <ManageScholarships />}
-        {activeTab === 'applications' && <ManageApplications />}
-        {activeTab === 'users' && <ManageUsers />}
-        {activeTab === 'reviews' && <ManageReviews />}
-        {activeTab === 'analytics' && <Analytics />}
-      </main>
+        </TabsList>
+
+        <TabsContent value="profile">
+          <AdminProfile />
+        </TabsContent>
+        <TabsContent value="add">
+          <AddScholarship />
+        </TabsContent>
+        <TabsContent value="scholarships">
+          <ManageScholarships />
+        </TabsContent>
+        <TabsContent value="applications">
+          <ManageApplications />
+        </TabsContent>
+        <TabsContent value="users">
+          <ManageUsers />
+        </TabsContent>
+        <TabsContent value="reviews">
+          <ManageReviews />
+        </TabsContent>
+        <TabsContent value="analytics">
+          <Analytics />
+        </TabsContent>
+      </Tabs>
     </div>
   );
-} 
+}

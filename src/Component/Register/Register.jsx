@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, UserPlus } from 'lucide-react';
 import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
-import { useNavigate } from 'react-router';       
+import { useNavigate } from 'react-router';
 import toast, { Toaster } from 'react-hot-toast';
 import { auth } from '../../firebase.init';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Label } from '../../components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +39,6 @@ const Register = () => {
         toast.error('Failed to get token');
       }
     } catch (err) {
-      
       toast.error('Token error');
     }
   };
@@ -52,10 +55,9 @@ const Register = () => {
       if (data.insertedId || data.message === 'User already exists') {
         // ok – no toast to avoid double success spam
       } else {
-        toast.error('Couldn’t save user in DB');
+        toast.error("Couldn't save user in DB");
       }
     } catch (err) {
-      
       toast.error('DB save error');
     }
   };
@@ -63,7 +65,7 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  
+
     if (name === 'password') {
       const errors = [];
       if (value.length < 6) errors.push("At least 6 characters.");
@@ -72,148 +74,143 @@ const Register = () => {
       setPasswordError(errors.join(' '));
     }
   };
-  
 
-     const handleRegister = async (e) => {
-      e.preventDefault();
-      const { name, email, password, photoURL } = formData;
-    
-     
-      const errors = [];
-      if (password.length < 6) errors.push("Password must be at least 6 characters.");
-      if (!/[A-Z]/.test(password)) errors.push("Password must include a capital letter.");
-      if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) errors.push("Password must include a special character.");
-    
-      if (errors.length > 0) {
-        errors.forEach((err) => toast.error(err));
-        return; 
-      }
-    
-      try {
-        const { user } = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(user, { displayName: name, photoURL });
-    
-        await saveUserInDB({
-          email: user.email,
-          displayName: name,
-          photoURL,
-          uid: user.uid,
-        });
-    
-        await getJWT(user.email, user.uid);
-    
-        toast.success("Registration successful!");
-        navigate("/");
-      } catch (err) {
-        toast.error(err.message);
-      }
-    };
-    
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const { name, email, password, photoURL } = formData;
+
+    const errors = [];
+    if (password.length < 6) errors.push("Password must be at least 6 characters.");
+    if (!/[A-Z]/.test(password)) errors.push("Password must include a capital letter.");
+    if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) errors.push("Password must include a special character.");
+
+    if (errors.length > 0) {
+      errors.forEach((err) => toast.error(err));
+      return;
+    }
+
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(user, { displayName: name, photoURL });
+
+      await saveUserInDB({
+        email: user.email,
+        displayName: name,
+        photoURL,
+        uid: user.uid,
+      });
+
+      await getJWT(user.email, user.uid);
+
+      toast.success("Registration successful!");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   return (
-    <div className="py-5 md:py-20 bg-gray-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex items-center justify-center px-4 py-12">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="bg-white shadow-lg rounded-2xl w-full max-w-md p-8">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">
-            Create A New Account
-          </h2>
-          <p className="text-sm text-gray-500 mt-1">Sign up to get started!</p>
-        </div>
-
-        <form onSubmit={handleRegister} className="space-y-5">
-        
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Your full name"
-            />
+      <Card className="w-full max-w-lg shadow-2xl border-0">
+        <CardHeader className="space-y-1 text-center pb-8">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#FEE685] to-[#ffd93d] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <UserPlus className="w-8 h-8 text-black" />
           </div>
+          <CardTitle className="text-3xl font-bold">Create Account</CardTitle>
+          <CardDescription className="text-base">
+            Join ScholarCore to discover scholarship opportunities
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <form onSubmit={handleRegister} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
+              <Input
+                id="name"
+                type="text"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="John Doe"
+                className="h-11"
+              />
+            </div>
 
-      
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="you@example.com"
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                className="h-11"
+              />
+            </div>
 
-      
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Image URL
-            </label>
-            <input
-              type="text"
-              name="photoURL"
-              value={formData.photoURL}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="https://your-image-url.com"
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="photoURL" className="text-sm font-medium">Profile Image URL (Optional)</Label>
+              <Input
+                id="photoURL"
+                type="text"
+                name="photoURL"
+                value={formData.photoURL}
+                onChange={handleChange}
+                placeholder="https://your-image-url.com"
+                className="h-11"
+              />
+            </div>
 
-        
-<div>
-  <label className="block text-gray-700 font-medium mb-1">
-    Password
-  </label>
-  <div className="relative">
-    <input
-      type={showPassword ? 'text' : 'password'}
-      name="password"
-      required
-      value={formData.password}
-      onChange={handleChange}
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
-      placeholder="Create a password"
-    />
-    <button
-      type="button"
-      onClick={() => setShowPassword(!showPassword)}
-      className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-    >
-      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-    </button>
-  </div>
-  {passwordError && (
-    <p className="text-sm text-red-500 mt-1">{passwordError}</p>
-  )}
-</div>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Create a strong password"
+                  className="pr-10 h-11"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              {passwordError && (
+                <p className="text-sm text-red-500 mt-1">{passwordError}</p>
+              )}
+              <p className="text-xs text-gray-500 mt-1">
+                Must contain at least 6 characters, 1 uppercase letter, and 1 special character
+              </p>
+            </div>
 
+            <Button
+              type="submit"
+              className="w-full bg-[#FEE685] text-black hover:bg-[#FEE685]/90 font-semibold h-11 shadow-md hover:shadow-lg transition-all"
+            >
+              Create Account
+            </Button>
+          </form>
 
-        
-          <button
-            type="submit"
-            className="w-full bg-amber-200 text-gray-900 font-semibold py-2 rounded-lg hover:bg-amber-300 transition"
-          >
-            Register
-          </button>
-        </form>
-
-        <p className="text-center text-sm text-gray-500 mt-6">
-          Already have an account?{' '}
-          <a href="/login" className="text-blue-600 hover:underline">
-            Log in
-          </a>
-        </p>
-      </div>
+          <p className="text-center text-sm text-gray-600 pt-4">
+            Already have an account?{' '}
+            <a href="/login" className="text-black font-semibold hover:underline">
+              Sign in
+            </a>
+          </p>
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { User, FileText, Star } from 'lucide-react';
 import MyProfile from './MyProfile';
 import MyApplications from './MyApplications';
 import MyReviews from './MyReviews';
 import { AuthContext } from '../../context/AuthContext';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 
 const TABS = [
-  { key: 'profile', label: 'My Profile' },
-  { key: 'applications', label: 'My Application' },
-  { key: 'reviews', label: 'My Reviews' },
+  { key: 'profile', label: 'My Profile', icon: User },
+  { key: 'applications', label: 'My Applications', icon: FileText },
+  { key: 'reviews', label: 'My Reviews', icon: Star },
 ];
 
 export default function UserDashboard() {
@@ -19,28 +21,35 @@ export default function UserDashboard() {
   }, [tab]);
 
   return (
-    <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">
-     
-      <aside className="w-full md:w-64 bg-gray-100 p-6 border-r md:border-b-0 border-b md:rounded-none rounded-b-xl">
-        <h2 className="text-xl font-bold mb-6">User Dashboard</h2>
-        <nav className="flex flex-col gap-3">
-          {TABS.map(t => (
-            <button
-              key={t.key}
-              className={`text-left px-4 py-2 rounded-lg font-medium ${tab === t.key ? 'bg-amber-400 text-white' : 'hover:bg-amber-200'}`}
-              onClick={() => setTab(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </nav>
-      </aside>
-    
-      <main className="flex-1 p-4 md:p-8">
-        {tab === 'profile' && <MyProfile />}
-        {tab === 'applications' && <MyApplications />}
-        {tab === 'reviews' && <MyReviews />}
-      </main>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-8">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <h2 className="text-4xl font-bold mb-8 text-black">User Dashboard</h2>
+        <Tabs value={tab} onValueChange={setTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsTrigger value="profile" className="flex items-center gap-2 data-[state=active]:bg-[#FEE685] data-[state=active]:text-black">
+              <User className="w-4 h-4" />
+              My Profile
+            </TabsTrigger>
+            <TabsTrigger value="applications" className="flex items-center gap-2 data-[state=active]:bg-[#FEE685] data-[state=active]:text-black">
+              <FileText className="w-4 h-4" />
+              My Applications
+            </TabsTrigger>
+            <TabsTrigger value="reviews" className="flex items-center gap-2 data-[state=active]:bg-[#FEE685] data-[state=active]:text-black">
+              <Star className="w-4 h-4" />
+              My Reviews
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="profile">
+            <MyProfile />
+          </TabsContent>
+          <TabsContent value="applications">
+            <MyApplications />
+          </TabsContent>
+          <TabsContent value="reviews">
+            <MyReviews />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
-} 
+}

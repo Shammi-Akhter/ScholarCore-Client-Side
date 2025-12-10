@@ -1,17 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { User, FileText, Star, MessageSquare, Plus, LayoutDashboard } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 import MyProfile from './MyProfile';
 import ManageScholarships from './ManageScholarships';
 import AllReviews from './AllReviews';
 import AllApplications from './AllApplications';
 import AddScholarship from './AddScholarship';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 
 const tabs = [
-  { key: 'profile', label: 'My Profile' },
-  { key: 'scholarships', label: 'Manage Scholarships' },
-  { key: 'reviews', label: 'All Reviews' },
-  { key: 'applications', label: 'All Applied Scholarships' },
-  { key: 'add', label: 'Add Scholarship' },
+  { key: 'profile', label: 'My Profile', icon: User },
+  { key: 'scholarships', label: 'Manage Scholarships', icon: LayoutDashboard },
+  { key: 'reviews', label: 'All Reviews', icon: Star },
+  { key: 'applications', label: 'All Applications', icon: FileText },
+  { key: 'add', label: 'Add Scholarship', icon: Plus },
 ];
 
 
@@ -28,30 +30,39 @@ export default function ModeratorDashboard() {
   }
 
   return (
-    <div className="px-2 sm:px-4 md:px-8 flex flex-col md:flex-row min-h-screen gap-6">
-   
-      <aside className="w-full md:w-64 bg-gray-100 p-6 border-r md:border-b-0 border-b md:rounded-none rounded-b-xl">
-        <h2 className="text-xl font-bold mb-6">Moderator Dashboard</h2>
-        <nav className="flex flex-col gap-3">
+    <div className="px-2 sm:px-4 md:px-8 py-8 bg-white min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-black">Moderator Dashboard</h1>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8">
           {tabs.map(tab => (
-            <button
+            <TabsTrigger
               key={tab.key}
-              className={`text-left px-4 py-2 rounded-lg font-medium ${activeTab === tab.key ? 'bg-amber-400 text-white' : 'hover:bg-amber-100'}`}
-              onClick={() => setActiveTab(tab.key)}
+              value={tab.key}
+              className="data-[state=active]:bg-[#FEE685] data-[state=active]:text-black"
             >
-              {tab.label}
-            </button>
+              <tab.icon className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">{tab.label}</span>
+            </TabsTrigger>
           ))}
-        </nav>
-      </aside>
-     
-      <main className="flex-1 p-4 md:p-8">
-        {activeTab === 'profile' && <MyProfile />}
-        {activeTab === 'scholarships' && <ManageScholarships />}
-        {activeTab === 'reviews' && <AllReviews />}
-        {activeTab === 'applications' && <AllApplications />}
-        {activeTab === 'add' && <AddScholarship />}
-      </main>
+        </TabsList>
+
+        <TabsContent value="profile">
+          <MyProfile />
+        </TabsContent>
+        <TabsContent value="scholarships">
+          <ManageScholarships />
+        </TabsContent>
+        <TabsContent value="reviews">
+          <AllReviews />
+        </TabsContent>
+        <TabsContent value="applications">
+          <AllApplications />
+        </TabsContent>
+        <TabsContent value="add">
+          <AddScholarship />
+        </TabsContent>
+      </Tabs>
     </div>
   );
-} 
+}

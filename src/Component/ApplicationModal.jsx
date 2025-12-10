@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { X, User, Mail, Hash, Phone, MapPin, GraduationCap, FileText, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 
 export default function ApplicationModal({ open, onClose, scholarship, user, scholarshipId, onSubmit }) {
   const [form, setForm] = useState({
@@ -19,7 +23,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
 
   const handleSubmit = async (e) => {
     e.preventDefault();
- 
+
     const application = {
       ...form,
       userName: user?.displayName || '',
@@ -27,7 +31,7 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
       userId: user?.uid || '',
       userPhoto: user?.photoURL || '',
       scholarshipId: scholarshipId,
-      scholarshipName: scholarship.scholarshipName || scholarship.name || '', 
+      scholarshipName: scholarship.scholarshipName || scholarship.name || '',
       universityName: scholarship.universityName,
       scholarshipCategory: scholarship.scholarshipCategory,
       subjectCategory: scholarship.subjectCategory,
@@ -57,97 +61,258 @@ export default function ApplicationModal({ open, onClose, scholarship, user, sch
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative p-0">
-        <button className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700 transition" onClick={onClose}>&times;</button>
-        <div className="px-8 pt-8 pb-4 max-h-[90vh] overflow-y-auto rounded-2xl">
-          <h2 className="text-3xl font-bold mb-6 text-center">Scholarship Application</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl relative max-h-[90vh] overflow-hidden">
+        {/* Header */}
+        <div className="sticky top-0 bg-gradient-to-r from-[#FEE685] to-[#ffd93d] px-8 py-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center">
+              <FileText className="w-6 h-6 text-[#FEE685]" />
+            </div>
+            <h2 className="text-2xl font-bold text-black">Scholarship Application</h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-10 h-10 rounded-lg hover:bg-black/10 flex items-center justify-center transition-colors"
+          >
+            <X className="w-6 h-6 text-black" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="px-8 py-6 overflow-y-auto max-h-[calc(90vh-180px)]">
+          {/* User Photo */}
           {user?.photoURL && (
-            <div className="flex justify-center mb-4">
-              <img src={user.photoURL} alt="User" className="w-20 h-20 rounded-full border-4 border-amber-200 shadow" />
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <img
+                  src={user.photoURL}
+                  alt="User"
+                  className="w-24 h-24 rounded-full object-cover ring-4 ring-[#FEE685] shadow-lg"
+                />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-[#FEE685] rounded-full flex items-center justify-center shadow-md">
+                  <User className="w-4 h-4 text-black" />
+                </div>
+              </div>
             </div>
           )}
-          <form onSubmit={handleSubmit} className="space-y-4">
-         
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">User Name</label>
-              <input type="text" value={user?.displayName || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Read-only Fields */}
+            <div className="space-y-4 pb-4 border-b">
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <User className="w-4 h-4" />
+                  User Name
+                </Label>
+                <Input
+                  type="text"
+                  value={user?.displayName || ''}
+                  readOnly
+                  className="bg-gray-50"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <Mail className="w-4 h-4" />
+                  User Email
+                </Label>
+                <Input
+                  type="text"
+                  value={user?.email || ''}
+                  readOnly
+                  className="bg-gray-50"
+                />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="flex items-center gap-2 text-sm font-medium">
+                    <Hash className="w-4 h-4" />
+                    User ID
+                  </Label>
+                  <Input
+                    type="text"
+                    value={user?.uid || ''}
+                    readOnly
+                    className="bg-gray-50 font-mono text-xs"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="flex items-center gap-2 text-sm font-medium">
+                    <Hash className="w-4 h-4" />
+                    Scholarship ID
+                  </Label>
+                  <Input
+                    type="text"
+                    value={scholarshipId}
+                    readOnly
+                    className="bg-gray-50 font-mono text-xs"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">User Email</label>
-              <input type="text" value={user?.email || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
+
+            {/* Editable Fields */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <Phone className="w-4 h-4" />
+                  Phone Number *
+                </Label>
+                <Input
+                  type="text"
+                  name="phone"
+                  placeholder="Enter phone number"
+                  required
+                  onChange={handleChange}
+                  className="h-11"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <MapPin className="w-4 h-4" />
+                  Address *
+                </Label>
+                <Input
+                  type="text"
+                  name="address"
+                  placeholder="Village, district, country"
+                  required
+                  onChange={handleChange}
+                  className="h-11"
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">User ID</label>
-              <input type="text" value={user?.uid || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <User className="w-4 h-4" />
+                  Gender *
+                </Label>
+                <select
+                  name="gender"
+                  required
+                  onChange={handleChange}
+                  className="flex h-11 w-full rounded-lg bg-white px-3 py-2 text-base shadow-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FEE685] focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <GraduationCap className="w-4 h-4" />
+                  Applying Degree *
+                </Label>
+                <Input
+                  type="text"
+                  name="degree"
+                  placeholder="e.g., Bachelor's, Master's"
+                  required
+                  onChange={handleChange}
+                  className="h-11"
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Scholarship ID</label>
-              <input type="text" value={scholarshipId} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <FileText className="w-4 h-4" />
+                  SSC Result *
+                </Label>
+                <Input
+                  type="text"
+                  name="ssc"
+                  placeholder="e.g., GPA 5.00"
+                  required
+                  onChange={handleChange}
+                  className="h-11"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2 text-sm font-medium">
+                  <FileText className="w-4 h-4" />
+                  HSC Result *
+                </Label>
+                <Input
+                  type="text"
+                  name="hsc"
+                  placeholder="e.g., GPA 5.00"
+                  required
+                  onChange={handleChange}
+                  className="h-11"
+                />
+              </div>
             </div>
-          
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Phone Number</label>
-              <input type="text" name="phone" placeholder="Phone Number" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange} />
+
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2 text-sm font-medium">
+                <GraduationCap className="w-4 h-4" />
+                Study Gap (Optional)
+              </Label>
+              <Input
+                type="text"
+                name="studyGap"
+                placeholder="e.g., 1 year"
+                onChange={handleChange}
+                className="h-11"
+              />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Address</label>
-              <input type="text" name="address" placeholder="Address (village, district, country)" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange} />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Gender</label>
-              <select name="gender" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange}>
-                <option value="">Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Applying Degree</label>
-              <select name="degree" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange}>
-                <option value="">Applying Degree</option>
-                <option>Diploma</option>
-                <option>Bachelor</option>
-                <option>Masters</option>
-              </select>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">SSC Result</label>
-              <input type="text" name="ssc" placeholder="SSC Result" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange} />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">HSC Result</label>
-              <input type="text" name="hsc" placeholder="HSC Result" required className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange} />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Study Gap (optional)</label>
-              <select name="studyGap" className="input input-bordered w-full rounded-lg col-span-2" onChange={handleChange}>
-                <option value="">Study Gap (optional)</option>
-                <option>None</option>
-                <option>1 year</option>
-                <option>2 years</option>
-                <option>3+ years</option>
-              </select>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">University Name</label>
-              <input type="text" value={scholarship.universityName || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Scholarship Category</label>
-              <input type="text" value={scholarship.scholarshipCategory || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-              <label className="font-medium text-gray-700 text-right pr-2">Subject Category</label>
-              <input type="text" value={scholarship.subjectCategory || ''} readOnly className="input input-bordered w-full bg-gray-100 rounded-lg col-span-2" />
-            </div>
-            <div className="flex justify-center pt-2">
-              <button type="submit" className="btn bg-amber-400 hover:bg-amber-500 text-white font-bold px-8 py-2 rounded-full shadow transition-all duration-200 w-full max-w-xs">Submit / Apply</button>
+
+            {/* Scholarship Info */}
+            <div className="pt-4 border-t space-y-3 bg-gray-50 -mx-8 px-8 py-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-3">Scholarship Details</h3>
+              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-gray-600">University:</span>
+                  <p className="font-medium">{scholarship.universityName}</p>
+                </div>
+                <div>
+                  <span className="text-gray-600">Category:</span>
+                  <p className="font-medium">{scholarship.scholarshipCategory}</p>
+                </div>
+                <div>
+                  <span className="text-gray-600">Subject:</span>
+                  <p className="font-medium">{scholarship.subjectCategory}</p>
+                </div>
+                <div>
+                  <span className="text-gray-600">Location:</span>
+                  <p className="font-medium">{scholarship.location}</p>
+                </div>
+              </div>
             </div>
           </form>
+        </div>
+
+        {/* Footer */}
+        <div className="sticky bottom-0 bg-white border-t px-8 py-4 flex gap-3">
+          <Button
+            type="button"
+            onClick={onClose}
+            variant="outline"
+            className="flex-1"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            className="flex-1 bg-[#FEE685] text-black hover:bg-[#FEE685]/90 font-semibold shadow-md"
+          >
+            <Send className="w-4 h-4 mr-2" />
+            Submit Application
+          </Button>
         </div>
       </div>
     </div>
   );
-} 
+}
