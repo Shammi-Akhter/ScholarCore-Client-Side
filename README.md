@@ -55,7 +55,7 @@ The goal of ScholarCore is to simplify the scholarship process for students whil
 
 ## 💻 Frontend Stack
 
-Built with **React**, styled using **Tailwind CSS** and **DaisyUI**, powered by **Vite** for fast builds.
+Built with **React**, styled using **Tailwind CSS**, **DaisyUI**, and **shadcn/ui** components, powered by **Vite** for fast builds. Icons provided by **Lucide React**.
 
 ### 📦 Frontend Dependencies
 
@@ -64,6 +64,8 @@ Built with **React**, styled using **Tailwind CSS** and **DaisyUI**, powered by 
 - 🔄 **React Router** – Routing and navigation  
 - 🎨 **Tailwind CSS** – Utility-first styling  
 - 🌸 **DaisyUI** – Tailwind CSS component library  
+- 🎨 **shadcn/ui** – Re-usable component library built with Radix UI and Tailwind CSS  
+- 🧩 **Lucide React** – Beautiful & consistent icon library  
 - 💳 **@stripe/react-stripe-js** – Stripe payment (React integration)  
 - 💳 **@stripe/stripe-js** – Stripe client SDK  
 - 🔥 **Firebase** – Authentication and cloud storage  
@@ -72,8 +74,7 @@ Built with **React**, styled using **Tailwind CSS** and **DaisyUI**, powered by 
 - 🛷 **Slick Carousel** – Styles for slick slider  
 - 📊 **Recharts** – Charting and analytics  
 - 🎬 **Lottie React** – Animated illustrations  
-- 🌀 **Framer Motion** – UI animations  
-- 🧩 **Lucide React** – Icon library
+- 🌀 **Framer Motion** – UI animations
 
 ### 🧪 Dev Dependencies (Frontend)
 
