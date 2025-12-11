@@ -152,7 +152,7 @@ const Login = () => {
           <Button
             onClick={handleGoogleLogin}
             variant="outline"
-            className="w-full h-11 shadow-sm hover:shadow-md transition-all"
+            className="w-full h-11 shadow-sm hover:shadow-md hover:bg-gray-50 hover:border-gray-300 transition-all"
           >
             <svg
               className="w-5 h-5 mr-2"

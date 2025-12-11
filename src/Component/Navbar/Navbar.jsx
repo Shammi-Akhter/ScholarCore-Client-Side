@@ -120,11 +120,10 @@ const Navbar = () => {
 
               <Button
                 onClick={handleLogout}
-                variant="outline"
                 size="sm"
-                className="hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors"
+                className="bg-white text-black hover:bg-red-50 hover:text-black border-2 border-red-300 shadow-md hover:shadow-lg transition-all"
               >
-                <LogOut className="w-4 h-4 mr-2" />
+                <LogOut className="w-4 h-4 mr-2 text-red-600" />
                 Logout
               </Button>
             </>
@@ -132,9 +131,8 @@ const Navbar = () => {
             <>
               <Button
                 onClick={() => navigate("/login")}
-                variant="outline"
                 size="sm"
-                className="hover:bg-gray-100"
+                className="bg-white hover:bg-gray-50 shadow-md hover:shadow-lg transition-all border-0"
               >
                 Login
               </Button>
@@ -177,10 +175,9 @@ const Navbar = () => {
                 <>
                   <Button
                     onClick={handleLogout}
-                    variant="outline"
-                    className="w-full hover:bg-red-50 hover:text-red-600 hover:border-red-200"
+                    className="w-full bg-white text-black hover:bg-red-50 hover:text-black border-2 border-red-300 shadow-md hover:shadow-lg transition-all"
                   >
-                    <LogOut className="w-4 h-4 mr-2" />
+                    <LogOut className="w-4 h-4 mr-2 text-red-600" />
                     Logout
                   </Button>
                   {user.photoURL ? (
@@ -199,8 +196,7 @@ const Navbar = () => {
                 <>
                   <Button
                     onClick={() => navigate("/login")}
-                    variant="outline"
-                    className="w-full"
+                    className="w-full bg-white hover:bg-gray-50 shadow-md hover:shadow-lg transition-all border-0"
                   >
                     Login
                   </Button>

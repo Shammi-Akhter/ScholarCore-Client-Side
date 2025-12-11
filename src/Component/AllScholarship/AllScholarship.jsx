@@ -137,7 +137,7 @@ const AllScholarship = () => {
                                     </div>
                                     <div className="flex justify-between items-center pt-2 border-t">
                                         <span className="text-gray-600">Rating:</span>
-                                        <Badge variant="secondary" className="bg-gray-100">
+                                        <Badge className="bg-black text-white">
                                             ⭐ {scholar.rating ? `${scholar.rating} / 5` : 'No rating'}
                                         </Badge>
                                     </div>

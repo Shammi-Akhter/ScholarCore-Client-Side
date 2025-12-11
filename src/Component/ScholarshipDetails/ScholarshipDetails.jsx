@@ -51,6 +51,20 @@ const ScholarshipDetails = () => {
 
   const filteredReviews = reviews.filter((r) => r.scholarshipId === id);
 
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Date not available';
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    } catch (error) {
+      return dateString;
+    }
+  };
+
   const sliderSettings = {
     dots: filteredReviews.length > 2,
     infinite: filteredReviews.length > 2,
@@ -76,14 +90,19 @@ const ScholarshipDetails = () => {
       <style>{`
         .slick-track {
           display: flex !important;
+          align-items: stretch !important;
         }
         .slick-slide {
-          height: inherit !important;
+          height: auto !important;
           display: flex !important;
         }
         .slick-slide > div {
           height: 100%;
           display: flex;
+          width: 100%;
+        }
+        .review-card {
+          min-height: 280px;
         }
       `}</style>
       <div className="container mx-auto px-4 max-w-6xl">
@@ -213,15 +232,15 @@ const ScholarshipDetails = () => {
               <Slider {...sliderSettings}>
                 {filteredReviews.map((review, index) => (
                   <div key={index} className="px-3 h-full">
-                    <Card className="shadow-md hover:shadow-lg transition-shadow h-full">
-                      <CardContent className="p-6 flex flex-col h-full">
+                    <Card className="shadow-md hover:shadow-lg transition-shadow h-full review-card flex flex-col">
+                      <CardContent className="px-6 py-8 flex flex-col h-full flex-1">
                         <div className="flex items-start gap-4 mb-4">
                           <div className="w-12 h-12 bg-gradient-to-br from-[#FEE685] to-[#ffd93d] rounded-full flex items-center justify-center flex-shrink-0">
                             <User className="w-6 h-6 text-black" />
                           </div>
                           <div className="flex-1">
                             <h4 className="font-semibold text-lg">{review.reviewerName}</h4>
-                            <p className="text-sm text-gray-500">{review.reviewDate}</p>
+                            <p className="text-sm text-gray-500">{formatDate(review.reviewDate)}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-1 mb-3">
